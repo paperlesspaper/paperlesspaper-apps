@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+These are paperlesspaper Integrations, that render different tools in a suitable size for eInk Displays using a next.js application.
 
-## Getting Started
+### Available integrations
 
-First, run the development server:
+#### Google Calendar
+
+Connect to your Google Calendar. You need to provide the data for the calendar using `window.postMessage`.
+
+#### Weather
+
+Displays the current weather and weather forecast for any location using [Openweathermap.org](https://openweathermap.org).
+
+#### Wikipedia
+
+Shows the Wikipedia "Article of the day" or "What happend on.." using the Wikipedia API. Available in English and German.
+
+#### RSS
+
+Displays any RSS-feed.
+
+### Features
+
+- Style selection
+- Optimized for 7 color AcEP eInk displays (Spectra 6 coming soon)
+- Optimization for fitting the screen
+- Horizontal and vertical usage
+- Multilanguage (TODO: Extract all language strings automatically)
+
+### Tools
+
+#### `RescaleText`
+
+`RescaleText` tries fitting the text into it's container.
+
+#### Properties
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+checkHeight = false
+maxFontSize = 100
+id = "no-id"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Usage with paperlesspaper
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+There is nothing you need to do. You can access each integration when creating a new image inside the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Usage with custom ePaper displays
 
-## Learn More
+You need to convert the website into a picture.
 
-To learn more about Next.js, take a look at the following resources:
+Steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Convert the website into a picture using [pupeteer](https://pptr.dev/)
+- Additional compare image to avoid sending the same image twice
+- Dither image
+- Transmit dithered image
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### ADD_LINK_TO_TUTORIAL_HERE
 
-## Deploy on Vercel
+TODO: Add pupeteer converter directly to API Route.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Install dependencies using `npm` or `yarn`.
+
+```
+yarn install
+```
+
+Start the development environment
+
+```
+yarn dev
+```

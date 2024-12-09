@@ -3,22 +3,45 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
+    "@types/qs": "^6.9.17",
+    "classnames": "^2.5.1",
+    "i18next": "^23.16.4",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next-http-backend": "^2.6.2",
+    "next": "14.2.8",
+    "qs": "^6.13.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.8"
+    "react-i18next": "^15.1.1",
+    "sass": "^1.78.0",
+    "xml2js": "^0.6.2",
+    "@fontsource/roboto": "^5.0.24",
+    "@fontsource/roboto-condensed": "^5.0.24",
+    "@fortawesome/fontawesome-pro": "^6.5.2",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/pro-duotone-svg-icons": "^6.5.2",
+    "@fortawesome/pro-light-svg-icons": "^6.5.2",
+    "@fortawesome/pro-regular-svg-icons": "^6.5.2",
+    "@fortawesome/pro-solid-svg-icons": "^6.5.2",
+    "@fortawesome/pro-thin-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@fortawesome/sharp-solid-svg-icons": "^6.5.2"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/xml2js": "^0.4.14",
     "eslint": "^8",
-    "eslint-config-next": "14.2.8"
+    "eslint-config-next": "14.2.8",
+    "typescript": "^5"
   }
 }

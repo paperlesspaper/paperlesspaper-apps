@@ -1,0 +1,84 @@
+html,
+body {
+  max-width: 100vw;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-open-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.dark {
+  --background: #000;
+  --foreground: #fff;
+  --accent: #ff0000;
+}
+
+.light {
+  --background: #fff;
+  --foreground: #000;
+  --accent: #ff0000;
+}
+
+.red-dark {
+  --background: #ff0000;
+  --foreground: #fff;
+  --accent: #fff;
+}
+
+.red-light {
+  --foreground: #ff0000;
+  --background: #fff;
+  --accent: #000;
+}
+
+.green {
+  --accent: #00ff00;
+}
+
+.blue {
+  --accent: #0000ff;
+}
+
+.orange {
+  --accent: #ff8000;
+}
+
+.yellow {
+  --accent: #ffff00;
+}
+
+.black {
+  --accent: #000;
+}
+
+.white {
+  --accent: #fff;
+}
+
+.red {
+  --accent: #ff0000;
+}

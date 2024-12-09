@@ -1,0 +1,30 @@
+.card {
+  padding: 0.5em;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.time {
+  font-weight: 800;
+  font-size: 1rem;
+  //background: var(--foreground);
+  // color: var(--background);
+  border-left: 3px solid var(--foreground);
+  padding: 0 0.4em;
+  margin-bottom: 0.4em;
+  margin-right: 0.3em;
+}
+
+.description {
+  font-size: 0.8rem;
+  line-height: 1.7;
+}

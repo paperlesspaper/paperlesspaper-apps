@@ -1,0 +1,51 @@
+.dayCalendar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  -webkit-font-smoothing: none;
+  font-family: var(--font-open-sans), serif;
+
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.dark {
+  --background: #000;
+  --foreground: #fff;
+}
+
+.light {
+  --background: #fff;
+  --foreground: #000;
+}
+
+.red-dark {
+  background: #ff0000;
+  color: #fff;
+}
+
+.red-light {
+  background: #fff;
+  color: #ff0000;
+}
+
+.description {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  text-transform: capitalize;
+}
+
+.details {
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading,
+.error {
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 2em;
+}
