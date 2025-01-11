@@ -36,19 +36,23 @@
   height: 100%;
   width: 100%;
 
+  &.showQuote {
+    align-items: flex-start;
+  }
   &.showOnlyDate {
     align-items: center;
     justify-content: center;
   }
   // min-width: 100%;
   // text-rendering: none;
-  h1 {
+  .weekday {
     font-weight: 800;
     font-size: 2.2em;
     font-weight: 600;
     margin-top: 0;
     line-height: 1;
     max-width: 100%;
+    min-height: 10vh;
     height: auto;
     text-transform: uppercase;
     font-family: var(--font-open-sans-condensed), serif;
@@ -59,19 +63,28 @@
     font-family: var(--font-open-sans-condensed), serif;
     position: relative;
     white-space: nowrap;
-    overflow: hidden;
+    //  overflow: hidden;
     max-width: 100%;
-    .showQuote & {
-      &:before {
-        content: "";
-        position: absolute;
-        top: -0.4em;
-        left: 0;
-        width: 17%;
-        height: 0.1em;
-        background: var(--foreground);
-      }
+  }
+}
+
+.showQuote {
+  .date {
+    max-width: 55%;
+    max-height: 20vh;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -2vmin;
+      left: 0;
+      width: 42%;
+      height: 0.1em;
+      background: var(--foreground);
     }
+  }
+  .weekday {
+    max-width: 90%;
   }
 }
 
@@ -121,8 +134,10 @@
   // font-style: italic;
   // margin-top: 2em;
   font-weight: 600;
-  width: 90vw;
+  width: 92vw;
   height: 50vh;
+  flex: 1;
+  margin-bottom: 2vh;
   @media screen and (max-height: 500px) {
     height: 40vh;
   }

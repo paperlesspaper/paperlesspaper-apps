@@ -46,12 +46,9 @@ export default function WikipediaScreen() {
 
     const apiUrl = `${url}${year}/${month}/${day}`;
 
-    console.log("apiUrl", apiUrl);
-
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    console.log("data", data);
     setWikipediaData(data);
   };
 
@@ -59,7 +56,9 @@ export default function WikipediaScreen() {
     getWikipedia();
   }, []);
 
-  if (!wikipediaData?.tfa) {
+  console.log("wikipediaData", wikipediaData);
+
+  if (!wikipediaData) {
     return null;
   }
 
@@ -119,7 +118,7 @@ export default function WikipediaScreen() {
         <div className={styles.extract}>
           <RescaleText id="temperature" maxFontSize={70} checkHeight>
             <div className={styles.date}>{formattedTime} –</div>{" "}
-            {truncateText(wikipediaData.tfa.extract, limitCharacters)}
+            {truncateText(wikipediaData.tfa?.extract, limitCharacters)}
           </RescaleText>
         </div>
       </div>

@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
 
   const encodedLocation = encodeURIComponent(location);
   const url =
-    kind === "3-days"
+    kind === "forecast"
       ? `https://api.openweathermap.org/data/2.5/forecast?q=${encodedLocation}&appid=${apiKey}&units=metric&lang=${language}`
       : `https://api.openweathermap.org/data/2.5/weather?q=${encodedLocation}&appid=${apiKey}&units=metric&lang=${language}`;
 

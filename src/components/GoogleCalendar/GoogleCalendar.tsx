@@ -5,31 +5,17 @@ import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
 import EventCard from "./EventCard";
 
-export default function GoogleCalendar() {
-  // Get the current date
-  //const today = new Date();
+type EventData = {
+  kind: string;
+  id: string;
+  summary: string;
+  description: string;
+  start: { dateTime?: string; date?: string };
+  end: { dateTime?: string; date?: string };
+};
 
-  /*
-  window.postMessage(
-    {
-      cmd: "message",
-      data: [
-        {
-          kind: "calendar#event",
-          id: "1",
-          summary: '"Einfaches Tanzen" im Neuen Volkshaus Cotta',
-          description:
-            '<p>Wir bewegen mit Monika unsere Arme, Hüften und Beine zu schönen, rhythmischen Klängen. <br>Mal sanft, mal temperamentvoll, mal in Reihe, mal im Kreis, aber immer mit viel Freude und Lebenslust!</p><p>Komm einfach vorbei, auch ohne Partner*in.</p><p><strong>Kostet?</strong> Wir freuen uns über eine Spende!</p><p><strong>Wann? </strong>montags, 10 bis 11 Uhr </p><p>Meldet Euch an über <a href="mailto:mitmachen@neuesvolkshaus.de">mitmachen@neuesvolkshaus.de</a> oder kommt einfach vorbei!</p>',
-          start: { dateTime: "2024-09-23T10:00:00+02:00" },
-          end: { dateTime: "2024-09-23T11:00:00+02:00" },
-        },
-      ],
-    },
-    "*"
-  );
-  */
-
-  const [eventsData, setEventsData] = useState([
+export default function GoogleCalendar(): JSX.Element {
+  const [eventsData, setEventsData] = useState<EventData[]>([
     {
       kind: "calendar#event",
       id: "1",
@@ -60,22 +46,9 @@ export default function GoogleCalendar() {
 
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "primary";
-  //const showTime = searchParams.get("showTime") === "true";
   const language = searchParams.get("language") || "en-US";
 
   console.log("color", color, language);
-
-  // Format the date (you can customize the format as needed)
-  /* const formattedDate = today.toLocaleDateString(language, {
-    //  weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  const weekday = today.toLocaleDateString(language, {
-    weekday: "long",
-  }); */
 
   const classNames = classnames(
     {
@@ -87,22 +60,11 @@ export default function GoogleCalendar() {
     kind
   );
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
   useEffect(() => {
-    // Function to handle incoming messages
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleMessage = (event: any) => {
-      // Ensure the message is from a trusted source
-      /* if (event.origin !== window.origin) {
-        return;
-      } */
-
-      // Check for the specific command and data structure
+    const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.cmd === "message") {
         console.log("Received data:", event.data.data);
         setEventsData(event.data.data);
-        // You can now access event.data.data.hello, which in this case is 'you'
       }
     };
 

@@ -51,11 +51,18 @@ export default function Day() {
       {/* Display the week day */}
 
       {showQuote ? (
-        <p className={styles.date}>
-          <RescaleText id="formattedDate" maxFontSize={150}>
-            {formattedDate}
-          </RescaleText>
-        </p>
+        <>
+          <p className={styles.date}>
+            <RescaleText id="formattedDate" maxFontSize={150} checkHeight>
+              {formattedDate}
+            </RescaleText>
+          </p>
+          <h1 className={styles.weekday}>
+            <RescaleText id="weekday" maxFontSize={100} checkHeight>
+              {weekday}
+            </RescaleText>
+          </h1>
+        </>
       ) : (
         <>
           <p className={styles.day}>
@@ -72,13 +79,13 @@ export default function Day() {
               })}
             </RescaleText>
           </p>
+          <h1 className={styles.weekday}>
+            <RescaleText id="weekday" maxFontSize={100} checkHeight>
+              {weekday}
+            </RescaleText>
+          </h1>
         </>
       )}
-      <h1 className={styles.weekday}>
-        <RescaleText id="weekday" maxFontSize={100} checkHeight>
-          {weekday}
-        </RescaleText>
-      </h1>
 
       {/* Display the current time */}
       {showTime && (

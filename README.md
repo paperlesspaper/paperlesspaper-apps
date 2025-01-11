@@ -1,4 +1,4 @@
-These are paperlesspaper Integrations, that render different tools in a suitable size for eInk Displays using a next.js application.
+These are [paperlesspaper](https://paperlesspaper.de/en) Integrations, that render different tools in a suitable size for eInk Displays using a next.js application.
 
 ### Available integrations
 
@@ -58,6 +58,8 @@ Steps:
 ### ADD_LINK_TO_TUTORIAL_HERE
 
 TODO: Add pupeteer converter directly to API Route.
+
+https://github.com/browserless/vercel-puppeteer/blob/main/src/pages/api/pdf.ts
 
 ### Development
 

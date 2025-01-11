@@ -1,19 +1,25 @@
 .dayCalendar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   height: 100%;
   -webkit-font-smoothing: none;
+  font-family: var(--font-open-sans), serif;
+
+  background: var(--background);
+  color: var(--foreground);
 }
 
 .dark {
-  background: #000;
-  color: #fff;
+  --background: #000;
+  --foreground: #fff;
+  --accent: #ff0000;
 }
 
 .light {
-  background: #fff;
-  color: #000;
+  --background: #fff;
+  --foreground: #000;
+  --accent: #ff0000;
 }
 
 .red-dark {
@@ -24,67 +30,4 @@
 .red-light {
   background: #fff;
   color: #ff0000;
-}
-
-.weatherContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: var(--font-open-sans-condensed), serif;
-  padding: 20px;
-  font-size: 10vmin;
-  text-align: center;
-}
-
-.location {
-  font-size: 2em;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  font-weight: 100;
-  max-height: 15vh;
-  letter-spacing: 0.03em;
-  width: 90vw;
-}
-
-.temperature {
-  font-size: 5em;
-  font-weight: bold;
-  margin-bottom: 0em;
-  width: 90vw;
-  max-height: 40vh;
-  white-space: nowrap;
-}
-
-.description {
-  font-size: 1em;
-  margin-bottom: 5vh;
-  text-transform: capitalize;
-  width: 90vw;
-  white-space: nowrap;
-}
-
-.details {
-  font-size: 1em;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  > div {
-    margin: 0 2vmin;
-  }
-  .weatherIcon {
-    margin-right: 0.3em;
-  }
-}
-
-.loading,
-.error {
-  font-size: 1.5em;
-  text-align: center;
-  margin-top: 2em;
-}
-
-.forecast {
-  display: flex;
-  width: 100%;
 }

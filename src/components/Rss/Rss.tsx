@@ -1,29 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./rss.module.scss";
 import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
 
-const stripHtmlTags = (html: string) => {
+const stripHtmlTags = (html: string): string => {
   const doc = new DOMParser().parseFromString(html, "text/html");
   return doc.body.textContent || "";
 };
 
-export default function Day() {
-  // Get the current date
-  //const today = new Date();
+interface RssItem {
+  title: string[];
+  pubDate?: string[];
+  updated?: string[];
+  content?: { _: string }[];
+  description?: string[];
+}
 
+interface RssData {
+  feed?: {
+    entry?: RssItem[];
+  };
+  rss?: {
+    channel?: {
+      item?: RssItem[];
+    }[];
+  };
+}
+
+export default function Day(): JSX.Element | null {
   const searchParams = useSearchParams();
 
   const feed = searchParams.get("feed") as string;
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "primary";
-  // const language = searchParams.get("language") || "en-US";
-
-  const [hiddenElements, setHiddenElements] = useState<any>([]);
-
-  const containerRefs = useRef<any>([]);
 
   const classNames = classnames({
     [styles.rssFeed]: true,
@@ -31,9 +42,9 @@ export default function Day() {
     [styles[kind]]: kind,
   });
 
-  const [rssData, setRssData] = useState<any>(null);
+  const [rssData, setRssData] = useState<RssData | null>(null);
 
-  const getRss = async () => {
+  const getRss = async (): Promise<void> => {
     const response = await fetch(`/api/rss?feed=${encodeURIComponent(feed)}`);
     const data = await response.json();
     setRssData(data);
@@ -43,60 +54,34 @@ export default function Day() {
     getRss();
   }, []);
 
-  useEffect(() => {
-    if (rssData) {
-      const newHiddenElements: any = [];
-      containerRefs.current.forEach((ref: any, i: number) => {
-        if (ref) {
-          if (ref.getBoundingClientRect().bottom > window.innerHeight) {
-            console.log("Content is overflowing", ref);
-
-            newHiddenElements.push(i);
-          }
-        }
-      });
-
-      if (newHiddenElements.length > 0) {
-        setHiddenElements(newHiddenElements);
-      }
-    }
-  }, [rssData]);
-
   if (!rssData) {
     return null;
   }
 
-  const items = rssData?.feed?.entry || rssData?.rss?.channel?.[0]?.item || [];
+  const items: RssItem[] =
+    rssData?.feed?.entry || rssData?.rss?.channel?.[0]?.item || [];
 
   return (
     <div className={classNames}>
       {items.length > 0 ? (
         <div className={styles.content}>
-          {items.map((item: any, index: number) => {
+          {items.map((item, index) => {
             const itemClasses = classnames({
               [styles.item]: true,
-              [styles.visible]: !hiddenElements.includes(index),
-              [styles.hidden]: hiddenElements.includes(index),
             });
-            const Element = hiddenElements.includes(index) ? "section" : "div";
 
-            const content = item?.content?.[0]._
+            const content = item?.content?.[0]?._
               ? stripHtmlTags(item.content[0]._)
-              : item.description && item.description[0];
+              : item.description?.[0] || "";
 
-            console.log("content", content);
             return (
-              <Element
-                key={index}
-                className={itemClasses}
-                ref={(el) => (containerRefs.current[index] = el) as any}
-              >
+              <section key={index} className={itemClasses}>
                 <h2>{item.title[0]}</h2>
                 <p className={styles.description}>
                   <span className={styles.date}>
-                    {item.pubDate || item.updated[0]
+                    {item.pubDate?.[0] || item.updated?.[0]
                       ? new Date(
-                          item?.pubDate?.[0] ? item.pubDate[0] : item.updated[0]
+                          (item.pubDate?.[0] || item.updated?.[0]) as string
                         ).toLocaleString([], {
                           year: "numeric",
                           month: "numeric",
@@ -109,7 +94,7 @@ export default function Day() {
                   </span>
                   {content}
                 </p>
-              </Element>
+              </section>
             );
           })}
         </div>

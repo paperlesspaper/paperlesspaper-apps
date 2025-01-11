@@ -1,0 +1,97 @@
+@mixin horizontal {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+.day {
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+}
+.weatherContainer {
+  display: flex;
+  min-width: 100%;
+  font-size: 1em;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0px;
+  > div {
+    min-height: 100%;
+    border-bottom: 1px solid #fff;
+    padding: 0.7em;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+    display: flex;
+    align-items: center;
+  }
+  > div:nth-last-child(-n + 4) {
+    border-bottom: none;
+  }
+}
+
+.forecastDate {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start !important;
+}
+
+.forecastTime {
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin-bottom: 0.2em;
+  white-space: nowrap;
+  @include horizontal {
+    font-size: 1.2em;
+  }
+}
+
+.forecastDay {
+  display: block;
+  font-size: 0.8em;
+}
+
+.forecastIcon {
+  display: inline-block;
+  width: 3em;
+  height: auto;
+  margin: -0.5em;
+  margin-right: -1em;
+}
+
+.forecastTemperature {
+  text-align: right;
+  padding: 0 1em;
+  flex-direction: column;
+  align-items: flex-end !important;
+}
+
+.forecastTemperatureText {
+  display: block;
+  font-size: 1.7em;
+  margin-bottom: 0.2em;
+  @include horizontal {
+    font-size: 1.4em;
+  }
+}
+
+.forecastDescriptionText {
+  font-size: 0.9em;
+  display: block;
+  white-space: nowrap;
+  @include horizontal {
+    font-size: 0.6em;
+  }
+}
+
+.forecastRain {
+  font-size: 1.3em;
+}
+
+.forecastRainIcon {
+  display: inline-block;
+
+  margin-right: 0.3em;
+}

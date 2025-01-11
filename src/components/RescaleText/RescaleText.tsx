@@ -57,7 +57,6 @@ const RescaleText: React.FC<RescaleTextProps> = ({
     resizeFont();
     window.addEventListener("resize", resizeFont);
 
-    // Cleanup listener on component unmount
     return () => window.removeEventListener("resize", resizeFont);
   }, [children, maxFontSize, checkHeight]);
 

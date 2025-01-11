@@ -57,14 +57,11 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     loadingStatuses.length > 0 &&
     loadingStatuses.every((status) => !status.loading);
 
-  console.log("loadingStatuses", loadingStatuses);
-
   return (
     <LoadingContext.Provider
       value={{ registerLoading, setLoadingStatus, allFinishedLoading }}
     >
       {children}
-      {/* Optional: You can display a loading indicator or any component based on allFinishedLoading */}
       {allFinishedLoading ? (
         <div id="website-has-loaded" />
       ) : (
@@ -75,7 +72,6 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   );
 };
 
-// Custom hook to use loading functionality
 interface UseLoadingProps {
   id: string;
 }
@@ -96,10 +92,6 @@ export const useLoading = ({ id }: UseLoadingProps) => {
 
   React.useEffect(() => {
     registerLoading(uniqueKey);
-    // Cleanup function to remove the loading state when the component unmounts
-    return () => {
-      //  setLoadingStatus(uniqueKey, false);
-    };
   }, [registerLoading, uniqueKey, setLoadingStatus]);
 
   const setLoading = useCallback(
