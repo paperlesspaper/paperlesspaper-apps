@@ -11,7 +11,9 @@ More about the integration:
 
 ## Features
 
-![Preview of screen](https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FDemotivationsssprueche%20Kalender.jpg&w=2048&q=75)
+![Preview of screen](https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FDemotivationsssprueche%20Kalender.jpg&w=2048&q=75){:height="50%" width="50%"}
+
+<img src="https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FDemotivationsssprueche%20Kalender.jpg&w=2048&q=75" width="24em">
 
 1. **Dynamic Date and Time Display**:
    - Shows the current date, day of the week, and optionally, the current time.
