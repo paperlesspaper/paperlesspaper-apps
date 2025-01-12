@@ -2,9 +2,16 @@
 
 ## Overview
 
-The `Day Calendar` component is a versatile React component for displaying the current date, day of the week, and optional content such as demotivational quotes or funny facts. It supports customization through query parameters, including theming, language, and content type.
+The `Day Calendar` is for displaying the current date, day of the week, and optional content such as demotivational quotes or funny facts. :)
+It supports customization through query parameters, including theming, language, and content type.
+
+More about the integration:
+
+[Integration blog post](https://paperlesspaper.de/en/applications/calendar)
 
 ## Features
+
+![Preview of screen](https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FDemotivationsssprueche%20Kalender.jpg&w=2048&q=75)
 
 1. **Dynamic Date and Time Display**:
    - Shows the current date, day of the week, and optionally, the current time.
