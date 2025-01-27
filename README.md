@@ -1,5 +1,6 @@
-These are [paperlesspaper](https://paperlesspaper.de/en) Integrations, that render different tools in a suitable size for eInk Displays using a next.js application.
+These are [paperlesspaper](https://paperlesspaper.de/en) Integrations, that renders different tools in a suitable size for eInk Displays using a next.js application.
 
+![Example image](https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FIMG_3151-Bearbeitet.jpg.jpg&w=2048&h=700&q=75)
 ### Available integrations
 
 #### Google Calendar
