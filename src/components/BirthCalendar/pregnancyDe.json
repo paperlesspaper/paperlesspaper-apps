@@ -1,0 +1,332 @@
+[
+  {
+    "day": 14,
+    "explanation": "Der Eisprung findet statt und die Gebärmutter bereitet sich auf die Einnistung vor. Ein Embryo existiert noch nicht.",
+    "size": 0.1,
+    "comparison": "Mohnsamen"
+  },
+  {
+    "day": 21,
+    "explanation": "Die Befruchtung erfolgt typischerweise in dieser Woche. Eine Zygote entsteht und beginnt sich zu teilen.",
+    "size": 0.2,
+    "comparison": "Sesamsamen"
+  },
+  {
+    "day": 28,
+    "explanation": "Die Blastozyste nistet sich in die Gebärmutterschleimhaut ein. Das Hormon hCG wird nun produziert.",
+    "size": 0.3,
+    "comparison": "Linse"
+  },
+  {
+    "day": 35,
+    "explanation": "Der Embryo bildet drei Schichten – Ektoderm, Mesoderm und Endoderm. Die Plazenta beginnt sich zu entwickeln.",
+    "size": 0.4,
+    "comparison": "Heidelbeere"
+  },
+  {
+    "day": 42,
+    "explanation": "Das Herz beginnt zu schlagen und grundlegende Gesichtszüge entstehen.",
+    "size": 0.6,
+    "comparison": "Bohne"
+  },
+  {
+    "day": 49,
+    "explanation": "Arm- und Beinknospen erscheinen. Das Neuralrohr schließt sich, um das Rückenmark zu bilden.",
+    "size": 0.9,
+    "comparison": "Kichererbse"
+  },
+  {
+    "day": 56,
+    "explanation": "Hände und Füße beginnen sich zu entwickeln. Gehirn und Gesichtszüge werden deutlicher.",
+    "size": 1.2,
+    "comparison": "Himbeere"
+  },
+  {
+    "day": 63,
+    "explanation": "Der Embryo hat noch Schwimmhäute zwischen Fingern und Zehen. Die wichtigsten Organe bilden sich.",
+    "size": 1.6,
+    "comparison": "Kidneybohne"
+  },
+  {
+    "day": 70,
+    "explanation": "Alle wichtigen Organe haben sich zu bilden begonnen. Der Schwanz bildet sich zurück.",
+    "size": 2.3,
+    "comparison": "Weintraube"
+  },
+  {
+    "day": 77,
+    "explanation": "Der Embryo wird zum Fötus. Die lebenswichtigen Organe wachsen weiter und nehmen ihre Funktion auf.",
+    "size": 3.1,
+    "comparison": "Kumquat"
+  },
+  {
+    "day": 84,
+    "explanation": "Finger und Zehen trennen sich. Zahnknospen und Nagelbetten entstehen.",
+    "size": 4.1,
+    "comparison": "Feige"
+  },
+  {
+    "day": 91,
+    "explanation": "Der Fötus bewegt sich spontan. Reflexe beginnen sich zu entwickeln.",
+    "size": 5.4,
+    "comparison": "Limette"
+  },
+  {
+    "day": 98,
+    "explanation": "Die Stimmbänder bilden sich. Der Darm wandert in die Bauchhöhle.",
+    "size": 7.4,
+    "comparison": "Pfirsich"
+  },
+  {
+    "day": 105,
+    "explanation": "Das Geschlecht des Babys kann erkennbar sein. Lanugo, feine Körperbehaarung, beginnt zu wachsen.",
+    "size": 8.7,
+    "comparison": "Zitrone"
+  },
+  {
+    "day": 112,
+    "explanation": "Die Knochen härten weiter aus. Das Baby kann Gesichtsausdrücke machen.",
+    "size": 10.1,
+    "comparison": "Apfel"
+  },
+  {
+    "day": 119,
+    "explanation": "Das Baby kann Geräusche hören. Kreislauf- und Harnsystem funktionieren.",
+    "size": 11.6,
+    "comparison": "Avocado"
+  },
+  {
+    "day": 126,
+    "explanation": "Fettdepots beginnen sich zu bilden. Das Skelett härtet weiter aus.",
+    "size": 13,
+    "comparison": "Zwiebel"
+  },
+  {
+    "day": 133,
+    "explanation": "Das Baby kann gähnen und Schluckauf haben. Das Nervensystem reift.",
+    "size": 14.2,
+    "comparison": "Süßkartoffel"
+  },
+  {
+    "day": 140,
+    "explanation": "Die Sinnesentwicklung schreitet voran. Das Baby kann Geräusche hören und darauf reagieren.",
+    "size": 15.3,
+    "comparison": "Mango"
+  },
+  {
+    "day": 147,
+    "explanation": "Die Hälfte der Schwangerschaft ist erreicht. Die Bewegungen des Babys sind nun häufig spürbar.",
+    "size": 25.4,
+    "comparison": "Banane"
+  },
+  {
+    "day": 154,
+    "explanation": "Das Verdauungssystem übt seine Funktionen. Das Baby schluckt Fruchtwasser.",
+    "size": 26.7,
+    "comparison": "Karotte"
+  },
+  {
+    "day": 161,
+    "explanation": "Die Lungen entwickeln sich rasch. Das Baby beginnt Schlafmuster zu entwickeln.",
+    "size": 27.8,
+    "comparison": "Spaghettikürbis"
+  },
+  {
+    "day": 168,
+    "explanation": "Geschmacksknospen entwickeln sich. Das Baby kann auf Licht und Geräusche reagieren.",
+    "size": 28.9,
+    "comparison": "Grapefruit"
+  },
+  {
+    "day": 175,
+    "explanation": "Die Haut wird weniger durchsichtig. Lungen und Gehirn reifen weiter.",
+    "size": 30,
+    "comparison": "Cantaloupe-Melone"
+  },
+  {
+    "day": 182,
+    "explanation": "Das Gehör ist vollständig entwickelt. Das Baby kann auf vertraute Stimmen reagieren.",
+    "size": 34.6,
+    "comparison": "Blumenkohl"
+  },
+  {
+    "day": 189,
+    "explanation": "Das Baby sammelt Fettreserven. Die Augen beginnen sich zu öffnen und zu blinzeln.",
+    "size": 35.6,
+    "comparison": "Kopfsalat"
+  },
+  {
+    "day": 196,
+    "explanation": "Die Nasenlöcher öffnen sich. Das Baby beginnt rhythmisch Fruchtwasser zu 'atmen'.",
+    "size": 36.6,
+    "comparison": "Kokosnuss"
+  },
+  {
+    "day": 203,
+    "explanation": "Die Lungenbläschen entwickeln sich. Wimpern und Augenbrauen sind vollständig ausgebildet.",
+    "size": 37.6,
+    "comparison": "Ananas"
+  },
+  {
+    "day": 210,
+    "explanation": "Das Sehvermögen entwickelt sich weiter. Gehirnaktivität ist messbar.",
+    "size": 38.6,
+    "comparison": "Kohlkopf"
+  },
+  {
+    "day": 217,
+    "explanation": "Fettschichten bilden sich. Das Baby beginnt, seine Körpertemperatur zu regulieren.",
+    "size": 39.9,
+    "comparison": "Butternut-Kürbis"
+  },
+  {
+    "day": 224,
+    "explanation": "Die Knochen des Babys sind vollständig entwickelt, jedoch noch weich.",
+    "size": 41.1,
+    "comparison": "Kürbis"
+  },
+  {
+    "day": 231,
+    "explanation": "Das Baby nimmt rasch an Gewicht zu. Gehirnverbindungen bilden sich schnell.",
+    "size": 42.4,
+    "comparison": "Eichelkürbis"
+  },
+  {
+    "day": 238,
+    "explanation": "Das Baby beginnt Mineralstoffe einzulagern. Lanugo fällt langsam aus.",
+    "size": 43.7,
+    "comparison": "Honigmelone"
+  },
+  {
+    "day": 245,
+    "explanation": "Die Pupillen können sich weiten. Das Immunsystem beginnt sich zu stärken.",
+    "size": 45,
+    "comparison": "Wassermelone"
+  },
+  {
+    "day": 252,
+    "explanation": "Das Baby erkennt vertraute Stimmen. Die Schädelknochen bleiben weich.",
+    "size": 46.2,
+    "comparison": "Jackfrucht"
+  },
+  {
+    "day": 259,
+    "explanation": "Die Position des Babys kann sich geburtsbereit kopfüber drehen.",
+    "size": 47.4,
+    "comparison": "Römersalat"
+  },
+  {
+    "day": 266,
+    "explanation": "Zentrales Nervensystem und Lungen reifen weiter.",
+    "size": 48.6,
+    "comparison": "Lauch"
+  },
+  {
+    "day": 273,
+    "explanation": "Das Baby übt das Atmen und Saugen. Die Gewichtszunahme setzt sich fort.",
+    "size": 49.8,
+    "comparison": "Mangold"
+  },
+  {
+    "day": 280,
+    "explanation": "Die Organe des Babys sind geburtsbereit. Die Bewegungen können sich verlangsamen.",
+    "size": 50.7,
+    "comparison": "Rhabarber"
+  },
+  {
+    "day": 287,
+    "explanation": "Das Baby ist termingerecht. Die Haut ist rosig und glatt.",
+    "size": 51,
+    "comparison": "Mini-Wassermelone"
+  },
+  {
+    "day": 294,
+    "age": "0-1 month",
+    "explanation": "Reagiert auf laute Geräusche, fixiert Gesichter und bewegt den Kopf von Seite zu Seite. Reflexe wie Saugen und Greifen dominieren."
+  },
+  {
+    "day": 324,
+    "age": "1-2 months",
+    "explanation": "Beginnt bewusst zu lächeln, kann sich kurzzeitig selbst beruhigen, folgt Gegenständen mit den Augen."
+  },
+  {
+    "day": 354,
+    "age": "2-3 months",
+    "explanation": "Hebt Kopf und Brust in Bauchlage an, gurrt und gluckst, erkennt Bezugspersonen."
+  },
+  {
+    "day": 384,
+    "age": "3-4 months",
+    "explanation": "Beginnt zu brabbeln, drückt die Beine durch, wenn die Füße eine feste Unterlage berühren, führt die Hände zum Mund."
+  },
+  {
+    "day": 414,
+    "age": "4-5 months",
+    "explanation": "Dreht sich vom Bauch auf den Rücken, zeigt Emotionen wie Freude und Frustration, greift nach Spielzeug."
+  },
+  {
+    "day": 444,
+    "age": "5-6 months",
+    "explanation": "Dreht sich in beide Richtungen, beginnt mit Unterstützung zu sitzen, reagiert auf den eigenen Namen."
+  },
+  {
+    "day": 474,
+    "age": "6-7 months",
+    "explanation": "Sitzt kurzzeitig ohne Unterstützung, wippt auf Händen und Knien vor und zurück, beginnt Fremde zu erkennen."
+  },
+  {
+    "day": 504,
+    "age": "7-8 months",
+    "explanation": "Krabbelt, benutzt die Finger, um Nahrung zu greifen, versteht 'nein'."
+  },
+  {
+    "day": 534,
+    "age": "8-9 months",
+    "explanation": "Zieht sich zum Stehen hoch, hat Lieblingsspielzeug, greift mit Daumen und Zeigefinger (Pinzettengriff)."
+  },
+  {
+    "day": 564,
+    "age": "9-10 months",
+    "explanation": "Läuft seitwärts an Möbeln entlang, imitiert Gesten, findet versteckte Gegenstände leicht."
+  },
+  {
+    "day": 594,
+    "age": "10-11 months",
+    "explanation": "Sagt gezielt 'Mama' und 'Papa', befolgt einfache Anweisungen, zeigt mit dem Zeigefinger."
+  },
+  {
+    "day": 624,
+    "age": "11-12 months",
+    "explanation": "Kann eventuell alleine stehen, beginnt Gegenstände richtig zu benutzen (z. B. Becher, Bürste), wiederholt Laute oder Handlungen, um Aufmerksamkeit zu erlangen."
+  },
+  {
+    "day": 654,
+    "age": "12-14 months",
+    "explanation": "Läuft selbstständig, trinkt aus einem Becher, zeigt auf Dinge, um zu zeigen, was es möchte."
+  },
+  {
+    "day": 684,
+    "age": "14-16 months",
+    "explanation": "Erkundet aktiv die Umgebung, sagt mehrere Einzelwörter, hilft gerne bei kleinen Aufgaben."
+  },
+  {
+    "day": 714,
+    "age": "16-18 months",
+    "explanation": "Beginnt zu rennen, kritzelt mit Wachsmalstiften, zeigt zunehmende Unabhängigkeit."
+  },
+  {
+    "day": 744,
+    "age": "18-20 months",
+    "explanation": "Sagt Sätze wie ‚mehr Milch‘, befolgt Zwei-Schritt-Anweisungen, wirft den Ball über die Schulter."
+  },
+  {
+    "day": 774,
+    "age": "20-22 months",
+    "explanation": "Kann Gegenstände in einem Bilderbuch benennen, beginnt Formen und Farben zu sortieren, imitiert das Verhalten anderer."
+  },
+  {
+    "day": 804,
+    "age": "22-24 months",
+    "explanation": "Spricht in kurzen Sätzen, klettert ohne Hilfe auf Möbel, beginnt mit fantasievollem Spiel mit Puppen/Spielzeug."
+  }
+]

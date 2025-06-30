@@ -17,7 +17,7 @@ export default function WikipediaScreen() {
   const searchParams = useSearchParams();
 
   const color = searchParams.get("color") || "dark";
-  const kind = searchParams.get("kind") || "primary";
+  const kind = searchParams.get("kind") || "default";
   //const showTime = searchParams.get("showTime") === "true";
   const language = searchParams.get("language") || "de";
   const accent = searchParams.get("accent") || "";
@@ -55,8 +55,6 @@ export default function WikipediaScreen() {
   useEffect(() => {
     getWikipedia();
   }, []);
-
-  console.log("wikipediaData", wikipediaData);
 
   if (!wikipediaData) {
     return null;

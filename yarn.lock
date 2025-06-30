@@ -41,15 +41,15 @@
   resolved "https://registry.npmjs.org/@eslint/js/-/js-8.57.0.tgz"
   integrity sha512-Ys+3g2TaW7gADOJzPt83SJtCDhMjndcDMFVQ/Tj9iA1BfJzFKD9mAUXT3OenpuPHbI6P/myECxRJrofUsDx/5g==
 
-"@fontsource/roboto-condensed@^5.0.24":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto-condensed/-/roboto-condensed-5.1.0.tgz#10e631e4259101dd0d030a227d3a105f3c03a906"
-  integrity sha512-cTS62X9bgR6H+3qRtaDwt0I+3ocitMPalyr2OrzJtilIcuEo4my8UA4VVhOgr0OI2Sk9JNrNYcSxkv0k4XuKtQ==
+"@fontsource/roboto-condensed@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto-condensed/-/roboto-condensed-5.2.6.tgz#b137319ae64ee8117700cd700a667d6388dac04c"
+  integrity sha512-xcvHM/urk/hdZknJNBpUzFdAA00QgKq+FdAfjO8soi9xeTlAPNz2wD2k+K7omsCfedGcOlQ6VnWJIRkF0egUjg==
 
-"@fontsource/roboto@^5.0.24":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.1.0.tgz#00230737ec09c60ae877a5e33d067c0607fdd5ba"
-  integrity sha512-cFRRC1s6RqPygeZ8Uw/acwVHqih8Czjt6Q0MwoUoDe9U3m4dH1HmNDRBZyqlMSFwgNAUKgFImncKdmDHyKpwdg==
+"@fontsource/roboto@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/roboto/-/roboto-5.2.6.tgz#93a2a5ef98cc79880355de0aac71def215b873e7"
+  integrity sha512-hzarG7yAhMoP418smNgfY4fO7UmuUEm5JUtbxCoCcFHT0hOJB+d/qAEyoNjz7YkPU5OjM2LM8rJnW8hfm0JLaA==
 
 "@fortawesome/fontawesome-common-types@6.6.0":
   version "6.6.0"

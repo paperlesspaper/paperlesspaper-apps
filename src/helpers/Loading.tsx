@@ -20,6 +20,7 @@ const LoadingContext = createContext<LoadingContextProps | undefined>(
 
 interface LoadingProviderProps {
   children: ReactNode;
+  finishedLoading?: boolean;
 }
 
 interface LoadingStatus {
@@ -30,6 +31,7 @@ interface LoadingStatus {
 // Provider component
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   children,
+  finishedLoading = false,
 }) => {
   const [loadingStatuses, setLoadingStatuses] = useState<LoadingStatus[]>([]);
 
@@ -54,8 +56,9 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 
   // Function to check if all hooks are finished loading
   const allFinishedLoading =
-    loadingStatuses.length > 0 &&
-    loadingStatuses.every((status) => !status.loading);
+    finishedLoading ||
+    (loadingStatuses.length > 0 &&
+      loadingStatuses.every((status) => !status.loading));
 
   return (
     <LoadingContext.Provider

@@ -1,0 +1,81 @@
+.daysLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  height: 100vh;
+  font-family: var(--font-open-sans-condensed), sans-serif;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 1.3rem;
+}
+
+.counts {
+  display: flex;
+  gap: 1rem;
+  font-weight: bold;
+  font-size: 7em;
+  margin-top: -0.2em;
+  > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 100;
+    margin: 0 3rem;
+  }
+}
+
+.passedCount {
+  color: var(--icon-filled);
+}
+.leftCount {
+  color: var(--icon-outline);
+}
+
+.countsDescription {
+  font-size: 1rem;
+  margin-top: -0.8rem;
+  text-transform: uppercase;
+}
+
+.description {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.8rem;
+}
+
+.progressWrapper {
+  width: 100%;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  max-height: 45vh;
+  margin-top: 0em;
+}
+
+.progress {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  display: block;
+  border-radius: 0.125rem;
+  display: inline-block;
+  &.passed {
+    background-color: var(--accent);
+  }
+  &.left {
+    background-color: transparent;
+    border: 2px solid var(--foreground);
+  }
+}

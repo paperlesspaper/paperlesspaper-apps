@@ -46,9 +46,6 @@ export default function GoogleCalendar(): JSX.Element {
 
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "primary";
-  const language = searchParams.get("language") || "en-US";
-
-  console.log("color", color, language);
 
   const classNames = classnames(
     {

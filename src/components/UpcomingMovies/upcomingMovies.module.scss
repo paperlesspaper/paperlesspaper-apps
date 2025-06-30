@@ -1,0 +1,74 @@
+.upcomingMovies {
+  display: flex;
+  font-family: var(--font-open-sans-condensed), serif;
+  background: var(--background);
+  color: var(--foreground);
+  width: 100vw;
+  max-width: 100vw;
+  @media (orientation: portrait) {
+    display: grid;
+
+    grid-template-columns: auto auto;
+    //gap: 10px;
+  }
+}
+.dayMovies {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.movieCard {
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.5em;
+
+  width: 100%;
+
+  @media (orientation: portrait) {
+    max-height: 50vh;
+    overflow: hidden;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.movieTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.releaseDate {
+  font-size: 0.7em;
+  margin-bottom: 0px;
+}
+
+.overview {
+  font-size: 0.8em;
+  line-height: 1.5;
+  @media (orientation: portrait) {
+    display: none;
+  }
+}
+
+.loading {
+  font-size: 1.5em;
+  text-align: center;
+  margin-top: 2em;
+}
+
+.error {
+  font-size: 1.5em;
+  color: red;
+  text-align: center;
+  margin-top: 2em;
+}

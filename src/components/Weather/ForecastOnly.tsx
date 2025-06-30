@@ -8,6 +8,8 @@ import RescaleText from "../RescaleText/RescaleText";
 
 export default function ForecastOnly({ language, weatherData }: any) {
   const { forecast } = weatherData;
+
+  console.log("ForecastOnly", weatherData);
   return (
     <div className={styles.day}>
       <RescaleText id="forecast" maxFontSize={100} checkHeight>

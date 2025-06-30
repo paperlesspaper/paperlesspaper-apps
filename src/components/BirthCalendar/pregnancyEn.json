@@ -1,0 +1,332 @@
+[
+  {
+    "day": 14,
+    "explanation": "Ovulation occurs and the uterus prepares for implantation. No embryo exists yet.",
+    "size": 0.1,
+    "comparison": "poppy seed"
+  },
+  {
+    "day": 21,
+    "explanation": "Fertilization typically happens this week. A zygote forms and begins dividing.",
+    "size": 0.2,
+    "comparison": "sesame seed"
+  },
+  {
+    "day": 28,
+    "explanation": "The blastocyst implants in the uterine lining. Hormone hCG is now produced.",
+    "size": 0.3,
+    "comparison": "lentil"
+  },
+  {
+    "day": 35,
+    "explanation": "The embryo forms 3 layers\u2014ectoderm, mesoderm, endoderm. Placenta begins forming.",
+    "size": 0.4,
+    "comparison": "blueberry"
+  },
+  {
+    "day": 42,
+    "explanation": "The heart starts beating and basic facial features begin to form.",
+    "size": 0.6,
+    "comparison": "bean"
+  },
+  {
+    "day": 49,
+    "explanation": "Arm and leg buds appear. Neural tube closes to form the spinal cord.",
+    "size": 0.9,
+    "comparison": "chickpea"
+  },
+  {
+    "day": 56,
+    "explanation": "Hands and feet start to develop. Brain and facial features are becoming more defined.",
+    "size": 1.2,
+    "comparison": "raspberry"
+  },
+  {
+    "day": 63,
+    "explanation": "The embryo has webbed fingers and toes. Major organs are forming.",
+    "size": 1.6,
+    "comparison": "kidney bean"
+  },
+  {
+    "day": 70,
+    "explanation": "All essential organs have begun forming. The tail is disappearing.",
+    "size": 2.3,
+    "comparison": "grape"
+  },
+  {
+    "day": 77,
+    "explanation": "The embryo becomes a fetus. Vital organs continue to grow and function.",
+    "size": 3.1,
+    "comparison": "kumquat"
+  },
+  {
+    "day": 84,
+    "explanation": "Fingers and toes separate. Tooth buds and nail beds form.",
+    "size": 4.1,
+    "comparison": "fig"
+  },
+  {
+    "day": 91,
+    "explanation": "The fetus moves spontaneously. Reflexes begin to develop.",
+    "size": 5.4,
+    "comparison": "lime"
+  },
+  {
+    "day": 98,
+    "explanation": "Vocal cords form. Intestines move into the abdomen.",
+    "size": 7.4,
+    "comparison": "peach"
+  },
+  {
+    "day": 105,
+    "explanation": "The baby's gender may be visible. Lanugo, fine hair, begins to form.",
+    "size": 8.7,
+    "comparison": "lemon"
+  },
+  {
+    "day": 112,
+    "explanation": "Bones continue to harden. Baby can make facial expressions.",
+    "size": 10.1,
+    "comparison": "apple"
+  },
+  {
+    "day": 119,
+    "explanation": "The baby can hear sounds. Circulatory and urinary systems are functioning.",
+    "size": 11.6,
+    "comparison": "avocado"
+  },
+  {
+    "day": 126,
+    "explanation": "Fat stores begin developing. Skeleton continues to harden.",
+    "size": 13,
+    "comparison": "onion"
+  },
+  {
+    "day": 133,
+    "explanation": "The baby can yawn and hiccup. Nervous system is maturing.",
+    "size": 14.2,
+    "comparison": "sweet potato"
+  },
+  {
+    "day": 140,
+    "explanation": "Sensory development advances. Baby can hear and respond to sounds.",
+    "size": 15.3,
+    "comparison": "mango"
+  },
+  {
+    "day": 147,
+    "explanation": "Halfway through pregnancy. Baby's movement can often be felt now.",
+    "size": 25.4,
+    "comparison": "banana"
+  },
+  {
+    "day": 154,
+    "explanation": "Digestive system practicing functions. Baby swallows amniotic fluid.",
+    "size": 26.7,
+    "comparison": "carrot"
+  },
+  {
+    "day": 161,
+    "explanation": "Lungs developing rapidly. Baby begins to develop sleep patterns.",
+    "size": 27.8,
+    "comparison": "spaghetti squash"
+  },
+  {
+    "day": 168,
+    "explanation": "Taste buds develop. Baby may respond to light and sound.",
+    "size": 28.9,
+    "comparison": "grapefruit"
+  },
+  {
+    "day": 175,
+    "explanation": "Skin is becoming less translucent. Lungs and brain continue maturing.",
+    "size": 30,
+    "comparison": "cantaloupe"
+  },
+  {
+    "day": 182,
+    "explanation": "Hearing is fully developed. Baby may respond to familiar voices.",
+    "size": 34.6,
+    "comparison": "cauliflower"
+  },
+  {
+    "day": 189,
+    "explanation": "Baby gains fat. Eyes begin to open and blink.",
+    "size": 35.6,
+    "comparison": "lettuce"
+  },
+  {
+    "day": 196,
+    "explanation": "Nostrils open. Baby starts breathing amniotic fluid rhythmically.",
+    "size": 36.6,
+    "comparison": "coconut"
+  },
+  {
+    "day": 203,
+    "explanation": "Lung sacs develop. Eyelashes and eyebrows are fully formed.",
+    "size": 37.6,
+    "comparison": "pineapple"
+  },
+  {
+    "day": 210,
+    "explanation": "Eyesight continues developing. Brain activity is detectable.",
+    "size": 38.6,
+    "comparison": "cabbage"
+  },
+  {
+    "day": 217,
+    "explanation": "Fat layers form. Baby begins regulating body temperature.",
+    "size": 39.9,
+    "comparison": "butternut squash"
+  },
+  {
+    "day": 224,
+    "explanation": "Baby's bones are fully developed, though still soft.",
+    "size": 41.1,
+    "comparison": "pumpkin"
+  },
+  {
+    "day": 231,
+    "explanation": "Baby gains weight rapidly. Brain connections are forming quickly.",
+    "size": 42.4,
+    "comparison": "acorn squash"
+  },
+  {
+    "day": 238,
+    "explanation": "Baby starts to store minerals. Lanugo starts shedding.",
+    "size": 43.7,
+    "comparison": "honeydew melon"
+  },
+  {
+    "day": 245,
+    "explanation": "Pupils can dilate. Immune system begins to strengthen.",
+    "size": 45,
+    "comparison": "watermelon"
+  },
+  {
+    "day": 252,
+    "explanation": "Baby recognizes familiar voices. Skull bones remain soft.",
+    "size": 46.2,
+    "comparison": "jackfruit"
+  },
+  {
+    "day": 259,
+    "explanation": "Baby's position may shift head-down for birth.",
+    "size": 47.4,
+    "comparison": "romaine lettuce"
+  },
+  {
+    "day": 266,
+    "explanation": "Central nervous system and lungs mature further.",
+    "size": 48.6,
+    "comparison": "leek"
+  },
+  {
+    "day": 273,
+    "explanation": "Baby practices breathing and sucking. Weight gain continues.",
+    "size": 49.8,
+    "comparison": "swiss chard"
+  },
+  {
+    "day": 280,
+    "explanation": "Baby's organs are ready for birth. Movements may slow down.",
+    "size": 50.7,
+    "comparison": "rhubarb"
+  },
+  {
+    "day": 287,
+    "explanation": "Baby is full term. Skin is pink and smooth.",
+    "size": 51,
+    "comparison": "mini watermelon"
+  },
+  {
+    "day": 294,
+    "age": "0-1 month",
+    "explanation": "Responds to loud sounds, stares at faces, moves head side to side. Reflexes like sucking and grasping dominate."
+  },
+  {
+    "day": 324,
+    "age": "1-2 months",
+    "explanation": "Begins to smile responsively, can briefly calm themselves, starts to follow things with eyes."
+  },
+  {
+    "day": 354,
+    "age": "2-3 months",
+    "explanation": "Raises head and chest during tummy time, coos and makes gurgling sounds, shows recognition of caregivers."
+  },
+  {
+    "day": 384,
+    "age": "3-4 months",
+    "explanation": "Begins to babble, pushes down on legs when feet are on hard surface, brings hands to mouth."
+  },
+  {
+    "day": 414,
+    "age": "4-5 months",
+    "explanation": "Rolls over from tummy to back, shows emotions like happiness and frustration, reaches for toys."
+  },
+  {
+    "day": 444,
+    "age": "5-6 months",
+    "explanation": "Rolls both ways, begins to sit with support, responds to own name."
+  },
+  {
+    "day": 474,
+    "age": "6-7 months",
+    "explanation": "Sits without support briefly, rocks back and forth on hands and knees, starts recognizing strangers."
+  },
+  {
+    "day": 504,
+    "age": "7-8 months",
+    "explanation": "Crawls, uses fingers to rake food, understands 'no'."
+  },
+  {
+    "day": 534,
+    "age": "8-9 months",
+    "explanation": "Pulls to stand, has favorite toys, uses thumb and finger to grasp."
+  },
+  {
+    "day": 564,
+    "age": "9-10 months",
+    "explanation": "Cruises while holding onto furniture, imitates gestures, finds hidden objects easily."
+  },
+  {
+    "day": 594,
+    "age": "10-11 months",
+    "explanation": "Says 'mama' and 'dada' specifically, follows simple directions, points with index finger."
+  },
+  {
+    "day": 624,
+    "age": "11-12 months",
+    "explanation": "May stand alone, starts using objects correctly (like cup, brush), repeats sounds or actions for attention."
+  },
+  {
+    "day": 654,
+    "age": "12-14 months",
+    "explanation": "Walks independently, drinks from a cup, points to show what they want."
+  },
+  {
+    "day": 684,
+    "age": "14-16 months",
+    "explanation": "Explores actively, says several single words, enjoys helping with chores."
+  },
+  {
+    "day": 714,
+    "age": "16-18 months",
+    "explanation": "Starts running, scribbles with crayon, shows increasing independence."
+  },
+  {
+    "day": 744,
+    "age": "18-20 months",
+    "explanation": "Says phrases like 'more milk', follows 2-step directions, throws ball overhand."
+  },
+  {
+    "day": 774,
+    "age": "20-22 months",
+    "explanation": "Can name items in a picture book, begins sorting shapes and colors, imitates behavior of others."
+  },
+  {
+    "day": 804,
+    "age": "22-24 months",
+    "explanation": "Speaks in short sentences, climbs onto furniture without help, starts pretend play with dolls/toys."
+  }
+]
