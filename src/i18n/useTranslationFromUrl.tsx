@@ -16,7 +16,7 @@ export default function useTranslationFromUrl(
 
   const searchParams = useSearchParams();
 
-  const language = searchParams.get("language") as string;
+  const language = (searchParams.get("language") as string) || "en-US";
 
   const languageCur = getCurrentLanguage(language);
   const { t } = useTranslation(languageCur, topic);

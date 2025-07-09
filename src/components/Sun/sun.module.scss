@@ -1,0 +1,70 @@
+.sunWrapper {
+  padding: 1vw;
+
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sunList {
+  max-width: 100%;
+  max-height: 100%;
+  white-space: nowrap;
+  display: flex;
+}
+
+.sunDay {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 1.8em;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.date {
+  font-size: 1em;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.times {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.timesInside {
+  display: flex;
+  font-size: 1.05em;
+  gap: 5vw;
+}
+
+.time {
+  font-size: 1.4em;
+  text-wrap: nowrap;
+  margin-bottom: 0.3em;
+}
+
+.quality {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.icon {
+  margin-right: 0.3em;
+}
+
+.cloudCover,
+.blueHour,
+.goldenHour {
+  strong {
+    display: block;
+    font-size: 0.5em;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+}
