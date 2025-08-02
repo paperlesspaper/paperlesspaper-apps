@@ -57,7 +57,8 @@ export function DaysLeft() {
     />
   ));
 
-  const { translation } = useTranslationFromUrl();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { t } = useTranslationFromUrl();
 
   const classes = classNames({
     [styles.daysLeft]: true,

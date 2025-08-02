@@ -25,7 +25,7 @@ interface SunDayProps {
   sunset?: SunEvent;
 }
 
-export default function SunDay({ date, day }: { day: SunDayProps }) {
+export default function SunDay({ day }: { day: SunDayProps }) {
   function formatTime(val?: string) {
     if (!val) return "-";
     return new Date(val).toLocaleTimeString([], {
@@ -48,7 +48,7 @@ export default function SunDay({ date, day }: { day: SunDayProps }) {
   return (
     <div className={styles.sunDay}>
       <div className={styles.date}>
-        <RescaleText id="date">{formatDate(date)}</RescaleText>
+        <RescaleText id="date">{formatDate(day.date)}</RescaleText>
       </div>
 
       <div className={styles.times}>
@@ -95,7 +95,7 @@ export default function SunDay({ date, day }: { day: SunDayProps }) {
                 <strong>
                   <Trans>Quality</Trans>:
                 </strong>{" "}
-                {day.sunset?.quality_text}
+                <Trans>{day.sunset?.quality_text}</Trans>
               </div>
               {(day.sunrise?.magics?.golden_hour ||
                 day.sunset?.magics?.golden_hour) && (

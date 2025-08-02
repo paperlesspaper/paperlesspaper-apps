@@ -36,6 +36,7 @@ export function GoogleKeep(): JSX.Element {
   const searchParams = useSearchParams();
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "primary";
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const language = searchParams.get("language") || "en-US";
 
   const classNames = classnames(

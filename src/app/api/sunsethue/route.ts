@@ -1,4 +1,3 @@
-import { time } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 // Docs: https://sunsethue.com/api

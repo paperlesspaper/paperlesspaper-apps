@@ -3,16 +3,8 @@ import React, { useEffect, useState } from "react";
 import { LoadingProvider, useLoading } from "@/helpers/Loading";
 import SunDay from "./SunDay";
 import styles from "./sun.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSun, faMoon } from "@fortawesome/pro-light-svg-icons";
-import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 
-interface SunDayData {
-  date: string;
-  sunrise: string;
-  sunset: string;
-  quality: string;
-}
+import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 
 interface SunEvent {
   type: "sunrise" | "sunset";
@@ -38,7 +30,9 @@ export function Sun() {
     Record<string, { sunrise?: SunEvent; sunset?: SunEvent; date?: string }>
   >({});
   const [error, setError] = useState<string | null>(null);
-  const setLoading = useLoading("sun-sunsethue");
+  const setLoading = useLoading({ id: "sun-sunsethue" });
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { language } = useTranslationFromUrl();
 
   useEffect(() => {
@@ -97,7 +91,7 @@ export function Sun() {
         {(() => {
           const firstDay = Object.entries(days)[0];
           return firstDay ? (
-            <SunDay day={firstDay[1]} date={firstDay[0]} />
+            <SunDay day={{ ...firstDay[1], date: firstDay[0] }} />
           ) : null;
         })()}
       </div>
