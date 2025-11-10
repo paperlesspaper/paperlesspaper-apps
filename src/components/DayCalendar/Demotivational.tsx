@@ -1,9 +1,7 @@
-import React from "react";
 import { demotivationalQuotesDe } from "./data/demotivational.de";
 import { demotivationalQuotesEn } from "./data/demotivational.en";
 import { funnyFactsDe } from "./data/funnyFacts.de";
 import { funnyFactsEn } from "./data/funnyFacts.en";
-import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 
 const getDayOfYear = () => {
   const now: Date = new Date();
@@ -14,13 +12,14 @@ const getDayOfYear = () => {
   return day;
 };
 
-export default function Demotivational({
+export default function demotivational({
   kind,
+  language = "de",
 }: {
   kind: "demotivational" | "funny";
+  language?: string;
 }) {
   const dayOfYear = getDayOfYear();
-  const { language } = useTranslationFromUrl();
 
   // Get the quote for the current day, mod by 356 to stay within array bounds
   const quotes =
@@ -34,7 +33,7 @@ export default function Demotivational({
 
   const quoteOfTheDay = quotes[dayOfYear % quotes.length];
 
-  const fontSize = quoteOfTheDay.length > 60 ? "0.65em" : "1em";
+  // const fontSize = quoteOfTheDay.length > 60 ? "0.65em" : "1em";
 
-  return <span style={{ fontSize }}>{quoteOfTheDay}</span>;
+  return quoteOfTheDay;
 }

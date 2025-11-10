@@ -3,8 +3,9 @@ import React from "react";
 import styles from "./day.module.scss";
 import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
-import Demotivational from "./Demotivational";
+import demotivational from "./Demotivational";
 import RescaleText from "../RescaleText/RescaleText";
+import RaggedParagraph from "../Hypen";
 
 export default function Day() {
   // Get the current date
@@ -16,6 +17,7 @@ export default function Day() {
   const kind = searchParams.get("kind") || "primary";
   const showTime = searchParams.get("showTime") === "true";
   const language = searchParams.get("language") || "en-US";
+  //const { language } = useTranslationFromUrl();
 
   // Format the date (you can customize the format as needed)
   const formattedDate = today.toLocaleDateString(language, {
@@ -42,21 +44,25 @@ export default function Day() {
   return (
     <div className={classNames}>
       {showQuote && (
-        <div className={styles.quote}>
-          <RescaleText checkHeight maxFontSize={100} id="quote">
-            <Demotivational kind={kind} />
-          </RescaleText>
+        <div className={styles.quote} lang="de">
+          {/* <RaggedParagraph text={Demotivational({ kind, language })}>
+            Warum sich verbessern Dampfschifffahrt? Perfektion ist unmöglich.
+          </RaggedParagraph> */}
+
+          <RaggedParagraph lang="de" id="demotivationalQuote" maxFontSize={90}>
+            {demotivational({ kind, language })}
+          </RaggedParagraph>
         </div>
       )}
       {/* Display the week day */}
 
       {showQuote ? (
         <>
-          <p className={styles.date}>
+          <div className={styles.date}>
             <RescaleText id="formattedDate" maxFontSize={150} checkHeight>
               {formattedDate}
             </RescaleText>
-          </p>
+          </div>
           <h1 className={styles.weekday}>
             <RescaleText id="weekday" maxFontSize={100} checkHeight>
               {weekday}

@@ -68,7 +68,7 @@ export async function getTranslationsByNamespace(
   lng: string
 ) {
   const data = await fetchAPIRest(
-    `translations?limit=1000&namespace=${namespace}&locale=${lng}`
+    `translations?limit=1000&where%5Bnamespace%5D%5Bequals%5D=${namespace}&locale=${lng}`
   );
   return data;
 }

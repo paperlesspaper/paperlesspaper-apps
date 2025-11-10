@@ -135,16 +135,22 @@
   // margin-top: 2em;
   font-weight: 600;
   width: 92vw;
-  height: 50vh;
+  height: 45vh;
+  margin-bottom: 8vh;
   flex: 1;
-  margin-bottom: 2vh;
+  > div {
+    padding-bottom: 2vh;
+  }
   @media screen and (max-height: 500px) {
-    height: 40vh;
+    height: 37vh;
   }
   line-height: 1;
   > span {
     display: block;
   }
-  text-wrap: pretty;
-  // hyphens: auto;
+  //text-wrap: balance;
+  //hyphens: auto;
+  // hyphenate-limit-chars: 6 4 4;
+  //overflow-wrap: anywhere;
+  //  hyphenate-limit-chars: auto;
 }

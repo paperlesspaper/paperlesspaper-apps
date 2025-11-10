@@ -5,6 +5,7 @@ import styles from "./upcomingMovies.module.scss";
 import { useSearchParams } from "next/navigation";
 import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 import classNames from "classnames";
+import RescaleText from "../RescaleText/RescaleText";
 
 interface Movie {
   id: number;
@@ -15,7 +16,7 @@ interface Movie {
 }
 
 interface UpcomingMoviesProps {
-  count: number;
+  countParam: number;
   language?: string;
 }
 
@@ -28,13 +29,13 @@ const languageLookup: Record<string, string> = {
 };
 
 export async function fetchUpcomingMovies({
-  count = 5,
+  countParam = 6,
   language = "en",
 }: UpcomingMoviesProps) {
   try {
     const languageWithCountry = languageLookup[language] || "en-US";
     const response = await fetch(
-      `/api/upcomingmovies?limit=${count}&language=${languageWithCountry}`
+      `/api/upcomingmovies?language=${languageWithCountry}&count=${countParam}`
     );
     if (!response.ok) {
       throw new Error("Failed to fetch upcoming movies");
@@ -60,7 +61,7 @@ const UpcomingMoviesScreen: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const searchParams = useSearchParams();
-  const count = searchParams.get("count") || 5;
+  const countParam = searchParams.get("count") || 6;
   const color = searchParams.get("color") || "dark";
   const accent = searchParams.get("accent") || "primary";
   const { language } = useTranslationFromUrl();
@@ -70,12 +71,12 @@ const UpcomingMoviesScreen: React.FC = () => {
     const getUpcomingMovies = async () => {
       try {
         const data = await fetchUpcomingMovies({
-          count: Number(count),
+          countParam: Number(countParam),
           language: language,
         });
         console.log("Upcoming movies data:", data);
 
-        setMovies(data.slice(0, count));
+        setMovies(data.slice(0, countParam));
       } catch (err) {
         console.log("err", err);
         setError("Failed to fetch upcoming movies.");
@@ -85,7 +86,7 @@ const UpcomingMoviesScreen: React.FC = () => {
     };
 
     getUpcomingMovies();
-  }, [count]);
+  }, [countParam]);
 
   if (loading) {
     return <div className={styles.loading}>Loading...</div>;
@@ -113,9 +114,20 @@ const UpcomingMoviesScreen: React.FC = () => {
             className={styles.poster}
           />
           <p className={styles.releaseDate}>{movie.release_date}</p>
-          <h3 className={styles.movieTitle}>{movie.title}</h3>
+          <h3 className={styles.movieTitle}>
+            <span>{movie.title}</span>
+          </h3>
 
-          <p className={styles.overview}>{movie.overview}</p>
+          <p className={styles.overview}>
+            <RescaleText
+              id={`movie-overview-${movie.id}`}
+              checkHeight
+              maxFontSize={126}
+              ellipsis
+            >
+              {movie.overview}
+            </RescaleText>
+          </p>
         </div>
       ))}
     </div>

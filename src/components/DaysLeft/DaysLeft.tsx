@@ -8,15 +8,15 @@ import { LoadingProvider } from "@/helpers/Loading";
 import RescaleText from "../RescaleText/RescaleText";
 import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 
-export default function DaysLeftWrapper() {
+export default function DaysLeftWrapper({ kind }: { kind: "since" | "until" }) {
   return (
     <LoadingProvider finishedLoading>
-      <DaysLeft />
+      <DaysLeft kind={kind} />
     </LoadingProvider>
   );
 }
 
-export function DaysLeft() {
+export function DaysLeft({ kind }: { kind: "since" | "until" }) {
   const params = useSearchParams();
   const dateParam = params.get("date") || "";
   const fromDateParam = params.get("from") || "";
@@ -75,15 +75,17 @@ export function DaysLeft() {
           <span className={styles.passedCount}>
             {daysPassed}
             <span className={styles.countsDescription}>
-              <Trans>days passed</Trans>
+              <Trans>days have passed</Trans>
             </span>
           </span>
-          <span className={styles.leftCount}>
-            {daysLeft}{" "}
-            <span className={styles.countsDescription}>
-              <Trans>days left</Trans>
+          {kind === "until" && (
+            <span className={styles.leftCount}>
+              {daysLeft}{" "}
+              <span className={styles.countsDescription}>
+                <Trans>days left</Trans>
+              </span>
             </span>
-          </span>
+          )}
         </div>
       </div>
       <div className={styles.progressWrapper}>

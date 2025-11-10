@@ -1,5 +1,7 @@
 # BirthCalendar Component
 
+I'm becoming a dad :)
+
 ## Overview
 
 The `BirthCalendar` component calculates and displays pregnancy progress information based on a provided birthdate.
