@@ -153,6 +153,7 @@ const RaggedParagraph: React.FC<RaggedParagraphProps> = ({
       let safety = 800;
       while (safety-- > 0) {
         layoutRaggedWithHyphenation();
+        console.log(`doScale: size=${size}`, overflows());
         if (!overflows()) break;
         size -= 0.5;
         if (size <= 0) break;

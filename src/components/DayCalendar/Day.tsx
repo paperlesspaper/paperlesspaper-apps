@@ -49,7 +49,12 @@ export default function Day() {
             Warum sich verbessern Dampfschifffahrt? Perfektion ist unmöglich.
           </RaggedParagraph> */}
 
-          <RaggedParagraph lang="de" id="demotivationalQuote" maxFontSize={90}>
+          <RaggedParagraph
+            lang="de"
+            id="demotivationalQuote"
+            maxFontSize={93}
+            checkHeight
+          >
             {demotivational({ kind, language })}
           </RaggedParagraph>
         </div>
