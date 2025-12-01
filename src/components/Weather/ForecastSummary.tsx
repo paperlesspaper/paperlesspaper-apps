@@ -55,7 +55,7 @@ export default function ForecastSummary({ language, weatherData }: any) {
         <div className={styles.todayForecast}>
           <h3 className={styles.todayForecastTitle}>
             <span>
-              <Trans>Today</Trans>
+              <Trans i18nKey="today-weather">Today</Trans>
             </span>
           </h3>
           <div className={styles.todayForecastContent}>
