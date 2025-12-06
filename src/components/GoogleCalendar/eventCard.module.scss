@@ -1,30 +1,40 @@
 .card {
-  padding: 0.5em;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  width: 100%;
+  padding: 0.2em 0.2em 0.7em 0.2em;
+  //margin-bottom: 12px;
+
+  margin: 0 -0.2em;
+  width: calc(100% + 0.4em);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  border-bottom: 2px solid #000;
+  &:last-child {
+    border-bottom: 0 solid #000;
+    //margin-bottom: -0.5em;
+  }
 }
 
 .title {
-  font-size: 1.7rem;
-  font-weight: 800;
+  font-size: 1.4em;
+  font-weight: 400;
 }
 
 .time {
-  font-weight: 800;
-  font-size: 1rem;
+  font-weight: 900;
+  font-size: 2em;
+
   //background: var(--foreground);
   // color: var(--background);
-  border-left: 3px solid var(--foreground);
-  padding: 0 0.4em;
-  margin-bottom: 0.4em;
+  // border-left: 3px solid var(--foreground);
+  //  padding: 0 0.4em;
+  margin-bottom: 0.1em;
   margin-right: 0.3em;
 }
 
 .description {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   line-height: 1.7;
 }

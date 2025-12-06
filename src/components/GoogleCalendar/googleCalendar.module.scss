@@ -1,39 +1,129 @@
+@use "../../styles/mixins" as *;
+
 .dayCalendar {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+  justify-content: stretch;
+  align-items: stretch;
+  @include horizontal {
+    flex-direction: column;
+  }
   height: 100%;
   -webkit-font-smoothing: none;
   font-family: var(--font-open-sans), serif;
 
   background: var(--background);
   color: var(--foreground);
+  height: 100vh;
+}
+
+.dayCalendarContent {
+  width: 100%;
+  //padding: 1em;
+  flex: 1;
+  overflow: hidden;
+}
+
+.dayCalendarInside {
+  padding: 1em;
+  height: 100%;
+}
+
+.todayBanner {
+  width: calc(100% + 2em);
+  margin: 0 -1em;
+  padding: 1em 2em;
+  background-color: var(--highlight);
+  color: var(--background);
+  display: flex;
+  flex-direction: column;
+
+  // align-items: center;
+  justify-content: center;
+  @include vertical {
+    width: 45%;
+    max-width: 45%;
+    min-width: 45%;
+    margin-right: 0;
+    font-size: 0.7em;
+  }
+
+  // letter-spacing: 0.08em;
+  font-weight: 800;
+  // text-transform: uppercase;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.todayBannerHint {
+  font-size: 0.9em;
+  letter-spacing: 0.3em;
+  opacity: 0.85;
+}
+
+.todayBannerWeekday {
+  font-size: 4em;
+  // letter-spacing: 0.12em;
+  margin-top: 0.2em;
+  font-weight: 100;
+}
+
+.todayBannerDate {
+  font-size: 4em;
+  letter-spacing: 0.04em;
+  margin-top: -0.1em;
+  text-transform: none;
+}
+
+.todayBanner + .dayCalendarContent {
+  margin-top: 0.3em;
 }
 
 .dark {
   --background: #000;
   --foreground: #fff;
+  --highlight: #0000ff;
 }
 
 .light {
   --background: #fff;
   --foreground: #000;
+  --highlight: var(--foreground);
+  --highlight: #0000ff;
 }
 
 .red-dark {
-  background: #ff0000;
+  background: #000;
   color: #fff;
+  --highlight: #ff0000;
 }
 
 .red-light {
-  background: #fff;
-  color: #ff0000;
+  --background: #fff;
+  --foreground: #000;
+  --highlight: #ff0000;
 }
 
 .description {
   font-size: 1.5em;
   margin-bottom: 1em;
   text-transform: capitalize;
+}
+
+.dayGroup + .dayGroup {
+  margin-top: 0.3em;
+}
+
+.dayHeader {
+  font-size: 1.25em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.3em;
+  background: var(--foreground);
+  color: var(--background);
 }
 
 .details {

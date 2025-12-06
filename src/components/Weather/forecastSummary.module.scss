@@ -1,8 +1,4 @@
-@mixin horizontal {
-  @media (orientation: portrait) {
-    @content;
-  }
-}
+@use "../../styles/mixins" as *;
 
 .weatherContainer {
   display: flex;

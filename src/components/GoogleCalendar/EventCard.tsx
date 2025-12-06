@@ -1,12 +1,19 @@
 import { Trans } from "react-i18next";
 import styles from "./eventCard.module.scss";
 import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
+import type { EventData } from "./GoogleCalendar";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const EventCard = ({ event }: any) => {
+type EventCardProps = {
+  event: EventData;
+};
+
+const EventCard = ({ event }: EventCardProps) => {
   const { summary, /* description, */ start, end } = event;
 
-  const formatTime = (dateTime: string) => {
+  const formatTime = (dateTime?: string) => {
+    if (!dateTime) {
+      return "";
+    }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any = { hour: "2-digit", minute: "2-digit" };
     return new Date(dateTime).toLocaleTimeString("de-DE", options);

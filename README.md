@@ -20,6 +20,10 @@ Shows the Wikipedia "Article of the day" or "What happend on.." using the Wikipe
 
 Displays any RSS-feed.
 
+#### Apotheken-Notdienst
+
+Shows pharmacies on emergency duty in Germany using the public search endpoint of [aponet.de](https://www.aponet.de/apotheke/notdienstsuche/). Supports the same configuration surface as the MagicMirror² module and exposes the data through `/api/apothekennotdienst`.
+
 ### Features
 
 - Style selection

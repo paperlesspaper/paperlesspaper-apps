@@ -1,0 +1,11 @@
+@mixin horizontal {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin vertical {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
