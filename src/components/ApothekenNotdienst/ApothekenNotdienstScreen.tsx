@@ -4,6 +4,10 @@ import classnames from "classnames";
 import { useSearchParams } from "next/navigation";
 import styles from "./apothekenNotdienst.module.scss";
 import { useLoading } from "@/helpers/Loading";
+import RescaleText from "../RescaleText/RescaleText";
+import { QRCodeSVG } from "qrcode.react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCarSide, faPersonWalking } from "@fortawesome/pro-regular-svg-icons";
 
 const DEFAULT_COORDINATES = {
   lat: 52.4974,
@@ -67,6 +71,21 @@ const parseDayParam = (value: string | null): DayOption =>
 
 const normalizeLocale = (value: string | null): string => value || "de-DE";
 
+const TODAY_LABEL = "heute";
+const TOMORROW_LABEL = "morgen";
+const SERVICE_WINDOW_LABEL = "Notdienstzeitraum";
+const ERROR_TITLE = "Fehler beim Laden";
+const ERROR_SUBTITLE = "Bitte später erneut versuchen.";
+const EMPTY_TITLE = "Keine Dienste gefunden";
+const EMPTY_SUBTITLE = (radius: number) =>
+  `Im ausgewählten Zeitraum ist in einem Radius von ${radius} km keine Apotheke im Notdienst.`;
+const DATA_SOURCE_LABEL = "Datenquelle";
+const DATA_SOURCE_VALUE = "www.aponet.de";
+const RADIUS_LABEL = (radius: number) => `${radius} km Radius`;
+const UPDATED_LABEL = (time: string) => `Stand ${time} Uhr`;
+const DISTANCE_LABEL = (distance: string) => `${distance} km`;
+const PHONE_LABEL = "Telefon";
+
 type ContactLists = {
   phones: string[];
   faxNumbers: string[];
@@ -109,83 +128,6 @@ type ApiResponse = {
   };
 };
 
-type CopySet = {
-  heading: string;
-  kicker: (label: string) => string;
-  emptyTitle: string;
-  emptySubtitle: (radius: number) => string;
-  errorTitle: string;
-  errorSubtitle: string;
-  radiusLabel: (radius: number) => string;
-  refreshLabel: (minutes: number) => string;
-  updatedLabel: (time: string) => string;
-  distanceLabel: (distance: string) => string;
-  serviceWindowLabel: string;
-  contactLabel: string;
-  phoneLabel: string;
-  faxLabel: string;
-  emailLabel: string;
-  dataSourceLabel: string;
-  dataSourceValue: string;
-  mapsCta: string;
-  todayLabel: string;
-  tomorrowLabel: string;
-};
-
-const copySets: Record<string, CopySet> = {
-  de: {
-    heading: "Apotheken-Notdienst",
-    kicker: (label) => `Bereitschaft ${label}`,
-    emptyTitle: "Keine Dienste gefunden",
-    emptySubtitle: (radius) =>
-      `Im ausgewählten Zeitraum ist in einem Radius von ${radius} km keine Apotheke im Notdienst.`,
-    errorTitle: "Fehler beim Laden",
-    errorSubtitle: "Bitte später erneut versuchen.",
-    radiusLabel: (radius) => `Radius ${radius} km`,
-    refreshLabel: (minutes) => `Aktualisierung alle ${minutes} min`,
-    updatedLabel: (time) => `Stand ${time}`,
-    distanceLabel: (distance) => `${distance} km entfernt`,
-    serviceWindowLabel: "Notdienstzeitraum",
-    contactLabel: "Kontakt",
-    phoneLabel: "Telefon",
-    faxLabel: "Fax",
-    emailLabel: "E-Mail",
-    dataSourceLabel: "Datenquelle",
-    dataSourceValue: "www.aponet.de",
-    mapsCta: "Route anzeigen",
-    todayLabel: "heute",
-    tomorrowLabel: "morgen",
-  },
-  en: {
-    heading: "Emergency Pharmacies",
-    kicker: (label) => `On duty ${label}`,
-    emptyTitle: "No duties nearby",
-    emptySubtitle: (radius) =>
-      `No pharmacies on duty within a ${radius} km radius for the selected day.`,
-    errorTitle: "Unable to load data",
-    errorSubtitle: "Please try again in a few minutes.",
-    radiusLabel: (radius) => `Radius ${radius} km`,
-    refreshLabel: (minutes) => `Refresh every ${minutes} min`,
-    updatedLabel: (time) => `Updated ${time}`,
-    distanceLabel: (distance) => `${distance} km away`,
-    serviceWindowLabel: "Service window",
-    contactLabel: "Contact",
-    phoneLabel: "Phone",
-    faxLabel: "Fax",
-    emailLabel: "Email",
-    dataSourceLabel: "Source",
-    dataSourceValue: "www.aponet.de",
-    mapsCta: "Open route",
-    todayLabel: "today",
-    tomorrowLabel: "tomorrow",
-  },
-};
-
-const getCopy = (language: string): CopySet => {
-  const base = language.split("-")[0]?.toLowerCase();
-  return copySets[base as keyof typeof copySets] || copySets.en;
-};
-
 const parseServiceDate = (
   date: string | null,
   time: string | null
@@ -203,6 +145,7 @@ const parseServiceDate = (
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 };
 
+/*
 const buildMapsUrl = (pharmacy: PharmacyDuty): string => {
   const { lat, lon } = pharmacy.coordinates;
   if (lat !== null && lon !== null) {
@@ -213,11 +156,33 @@ const buildMapsUrl = (pharmacy: PharmacyDuty): string => {
     query
   )}`;
 };
+*/
 
 const sanitizePhoneHref = (value: string): string =>
   value.replace(/[^+\d]/g, "");
 
-const sanitizeEmailHref = (value: string): string => value.trim();
+const APONET_PAGE_URL = "https://www.aponet.de/apotheke/notdienstsuche";
+
+const buildAponetSearchResultsUrl = (
+  meta: ApiResponse["meta"] | null,
+  fallbackPharmacy?: PharmacyDuty
+): string | null => {
+  if (!meta) {
+    return null;
+  }
+
+  const city = fallbackPharmacy?.address.city?.trim() || "";
+  const postalCode = fallbackPharmacy?.address.postalCode?.trim() || "";
+  const street = fallbackPharmacy?.address.street?.trim() || " ";
+  const plzOrt = [postalCode, city].filter(Boolean).join(" ").trim();
+  const radius = meta.radiusKm?.toString() || "";
+
+  const encodedPlzOrt = encodeURIComponent(plzOrt || city || " ");
+  const encodedStreet = encodeURIComponent(street || " ");
+  const encodedRadius = encodeURIComponent(radius || "");
+
+  return `${APONET_PAGE_URL}/${encodedPlzOrt}/${encodedStreet}/${encodedRadius}`;
+};
 
 export default function ApothekenNotdienstScreen(): JSX.Element {
   const searchParams = useSearchParams();
@@ -229,7 +194,6 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
   const radiusParam = searchParams.get("radius");
   const updateIntervalParam =
     searchParams.get("refreshInterval") || searchParams.get("updateInterval");
-
   const lat = parseFloatParam(
     searchParams.get("lat"),
     DEFAULT_COORDINATES.lat,
@@ -250,7 +214,6 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
   });
   const day = parseDayParam(searchParams.get("day"));
   const language = normalizeLocale(searchParams.get("language"));
-  const titleOverride = searchParams.get("title");
   const refreshIntervalMs = (() => {
     const parsed = parseIntegerParam(
       updateIntervalParam,
@@ -261,8 +224,6 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
       max: MAX_REFRESH_INTERVAL,
     });
   })();
-
-  const copy = useMemo(() => getCopy(language), [language]);
 
   const [pharmacies, setPharmacies] = useState<PharmacyDuty[]>([]);
   const [meta, setMeta] = useState<ApiResponse["meta"] | null>(null);
@@ -312,15 +273,13 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
     [language]
   );
 
-  const refreshMinutes = Math.round(refreshIntervalMs / 60000);
-
   const latestUpdateLabel = meta?.requestedAt
-    ? copy.updatedLabel(updatedFormatter.format(new Date(meta.requestedAt)))
+    ? UPDATED_LABEL(updatedFormatter.format(new Date(meta.requestedAt)))
     : null;
 
-  const highlightLabel = copy.kicker(
-    day === "today" ? copy.todayLabel : copy.tomorrowLabel
-  );
+  const highlightLabel = `Bereitschaft ${
+    day === "today" ? TODAY_LABEL : TOMORROW_LABEL
+  }`;
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const intervalRef = useRef<number | null>(null);
@@ -366,9 +325,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         }
         console.error("Apothekennotdienst request failed", requestError);
         setError(
-          requestError instanceof Error
-            ? requestError.message
-            : copy.errorSubtitle
+          requestError instanceof Error ? requestError.message : ERROR_SUBTITLE
         );
       } finally {
         if (trackLoading) {
@@ -391,7 +348,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         intervalRef.current = null;
       }
     };
-  }, [endpoint, refreshIntervalMs, setLoading, copy.errorSubtitle]);
+  }, [endpoint, refreshIntervalMs, setLoading]);
 
   const formatServiceWindow = (pharmacy: PharmacyDuty): string => {
     const start = parseServiceDate(
@@ -414,7 +371,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         pharmacy.serviceWindow.endTime || ""
       }`.trim();
     }
-    return copy.serviceWindowLabel;
+    return SERVICE_WINDOW_LABEL;
   };
 
   const classNames = classnames(
@@ -430,127 +387,147 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
 
   const skeletonItems = Array.from({ length: Math.min(limit, 4) });
 
+  const searchResultsUrl = useMemo(
+    () => buildAponetSearchResultsUrl(meta, pharmacies[0]),
+    [meta, pharmacies]
+  ) as string;
+
   return (
     <div className={classNames}>
-      <header className={styles.header}>
-        <div>
-          <p className={styles.kicker}>
-            {highlightLabel}
-            {meta?.searchDate ? ` • ${meta.searchDate}` : ""}
-          </p>
-          <h1>{titleOverride || copy.heading}</h1>
-        </div>
-        <div className={styles.chipRow}>
-          <span className={styles.chip}>{copy.radiusLabel(radius)}</span>
-          <span className={styles.chip}>
-            {copy.refreshLabel(refreshMinutes)}
-          </span>
-          {latestUpdateLabel ? (
-            <span className={styles.chip}>{latestUpdateLabel}</span>
-          ) : null}
-        </div>
-      </header>
-
-      {error ? (
-        <section className={styles.statePanel}>
-          <p className={styles.stateTitle}>{copy.errorTitle}</p>
-          <p className={styles.stateMessage}>{error}</p>
-        </section>
-      ) : null}
-
-      {showSkeleton ? (
-        <section className={styles.grid}>
-          {skeletonItems.map((_, index) => (
-            <article key={`skeleton-${index}`} className={styles.cardSkeleton}>
-              <div className={styles.skeletonLine} />
-              <div className={styles.skeletonLine} />
-              <div className={styles.skeletonLineShort} />
-            </article>
-          ))}
-        </section>
-      ) : null}
-
-      {showEmpty ? (
-        <section className={styles.statePanel}>
-          <p className={styles.stateTitle}>{copy.emptyTitle}</p>
-          <p className={styles.stateMessage}>{copy.emptySubtitle(radius)}</p>
-        </section>
-      ) : null}
-
-      {!showSkeleton && pharmacies.length > 0 ? (
-        <section className={styles.grid}>
-          {pharmacies.map((pharmacy) => (
-            <article key={pharmacy.id} className={styles.card}>
-              <header className={styles.cardHeader}>
-                <div>
-                  <p className={styles.cardLabel}>
-                    {pharmacy.chamber?.toUpperCase() || copy.serviceWindowLabel}
-                  </p>
-                  <h2>{pharmacy.name}</h2>
-                </div>
-                {pharmacy.distanceKm !== null ? (
-                  <span className={styles.distanceChip}>
-                    {copy.distanceLabel(
-                      distanceFormatter.format(pharmacy.distanceKm)
-                    )}
-                  </span>
+      <RescaleText
+        id="apotheken-notdienst-content"
+        maxFontSize={28}
+        checkHeight
+        style={{ width: "100%", height: "100%" }}
+        className={styles.contentWrapper}
+      >
+        <>
+          <header className={styles.header}>
+            <div>
+              <h1>
+                <span>{highlightLabel}</span>
+                <span>{meta?.searchDate ? ` ${meta.searchDate}` : ""}</span>
+              </h1>
+              <div className={styles.source}>
+                {DATA_SOURCE_LABEL}: {DATA_SOURCE_VALUE}
+              </div>
+            </div>
+            <div className={styles.additionalRow}>
+              <div className={styles.metaRow}>
+                {latestUpdateLabel ? (
+                  <span className={styles.meta}>{latestUpdateLabel}</span>
                 ) : null}
-              </header>
-
-              <address className={styles.address}>
-                {pharmacy.address.street}
-                <br />
-                {pharmacy.address.postalCode} {pharmacy.address.city}
-              </address>
-
-              <div className={styles.serviceWindow}>
-                <span className={styles.serviceLabel}>
-                  {copy.serviceWindowLabel}
-                </span>
-                <p>{formatServiceWindow(pharmacy)}</p>
+                <span className={styles.meta}>{RADIUS_LABEL(radius)}</span>
+                {/* <span className={styles.chip}>
+                Aktualisierung alle {refreshMinutes} min
+              </span> */}
               </div>
 
-              {(pharmacy.contact.phones.length > 0 ||
-                pharmacy.contact.faxNumbers.length > 0 ||
-                pharmacy.contact.emails.length > 0) && (
-                <div className={styles.contactBlock}>
-                  <span className={styles.serviceLabel}>
-                    {copy.contactLabel}
-                  </span>
-                  <ul className={styles.contactList}>
-                    {pharmacy.contact.phones.map((phone) => (
-                      <li key={`phone-${pharmacy.id}-${phone}`}>
-                        <span>{copy.phoneLabel}</span>
-                        <a href={`tel:${sanitizePhoneHref(phone)}`}>{phone}</a>
-                      </li>
-                    ))}
-                    {pharmacy.contact.faxNumbers.map((fax) => (
-                      <li key={`fax-${pharmacy.id}-${fax}`}>
-                        <span>{copy.faxLabel}</span>
-                        <span>{fax}</span>
-                      </li>
-                    ))}
-                    {pharmacy.contact.emails.map((email) => (
-                      <li key={`email-${pharmacy.id}-${email}`}>
-                        <span>{copy.emailLabel}</span>
-                        <a href={`mailto:${sanitizeEmailHref(email)}`}>
-                          {email}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </article>
-          ))}
-        </section>
-      ) : null}
+              <a
+                className={styles.qrLink}
+                href={searchResultsUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <QRCodeSVG value={searchResultsUrl} size={56} />
+              </a>
+            </div>
+          </header>
 
-      <footer className={styles.footer}>
-        <span>
-          {copy.dataSourceLabel}: {copy.dataSourceValue}
-        </span>
-      </footer>
+          {error ? (
+            <section className={styles.statePanel}>
+              <p className={styles.stateTitle}>{ERROR_TITLE}</p>
+              <p className={styles.stateMessage}>{error}</p>
+            </section>
+          ) : null}
+
+          {showSkeleton ? (
+            <section className={styles.grid}>
+              {skeletonItems.map((_, index) => (
+                <article
+                  key={`skeleton-${index}`}
+                  className={styles.cardSkeleton}
+                >
+                  <div className={styles.skeletonLine} />
+                  <div className={styles.skeletonLine} />
+                  <div className={styles.skeletonLineShort} />
+                </article>
+              ))}
+            </section>
+          ) : null}
+
+          {showEmpty ? (
+            <section className={styles.statePanel}>
+              <p className={styles.stateTitle}>{EMPTY_TITLE}</p>
+              <p className={styles.stateMessage}>{EMPTY_SUBTITLE(radius)}</p>
+            </section>
+          ) : null}
+
+          {!showSkeleton && pharmacies.length > 0 ? (
+            <section className={styles.grid}>
+              {pharmacies.map((pharmacy) => (
+                <article key={pharmacy.id} className={styles.card}>
+                  <header className={styles.cardHeader}>
+                    <h2>
+                      <span>{pharmacy.name}</span>
+                    </h2>
+
+                    {pharmacy.distanceKm !== null ? (
+                      <span className={styles.distanceChip}>
+                        {pharmacy.distanceKm < 2 ? (
+                          <FontAwesomeIcon
+                            icon={faPersonWalking}
+                            className={styles.distanceIcon}
+                          />
+                        ) : (
+                          <FontAwesomeIcon
+                            icon={faCarSide}
+                            className={styles.distanceIcon}
+                          />
+                        )}
+                        {DISTANCE_LABEL(
+                          distanceFormatter.format(pharmacy.distanceKm)
+                        )}
+                      </span>
+                    ) : null}
+                  </header>
+
+                  <address className={styles.address}>
+                    {pharmacy.address.street}, {pharmacy.address.postalCode}{" "}
+                    {pharmacy.address.city}
+                  </address>
+
+                  <div className={styles.infoRow}>
+                    <div className={styles.serviceWindow}>
+                      <span className={styles.serviceLabel}>
+                        {SERVICE_WINDOW_LABEL}
+                      </span>
+                      <p>{formatServiceWindow(pharmacy)}</p>
+                    </div>
+
+                    {(pharmacy.contact.phones.length > 0 ||
+                      pharmacy.contact.faxNumbers.length > 0 ||
+                      pharmacy.contact.emails.length > 0) && (
+                      <div className={styles.serviceWindow}>
+                        {pharmacy.contact.phones.map((phone) => (
+                          <>
+                            <span className={styles.serviceLabel}>
+                              {PHONE_LABEL}
+                            </span>
+                            <a href={`tel:${sanitizePhoneHref(phone)}`}>
+                              {phone}
+                            </a>
+                          </>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </section>
+          ) : null}
+        </>
+      </RescaleText>
     </div>
   );
 }

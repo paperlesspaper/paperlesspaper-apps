@@ -24,6 +24,7 @@
     "@fortawesome/sharp-solid-svg-icons": "^6.5.2",
     "@types/qs": "^6.9.17",
     "classnames": "^2.5.1",
+    "qrcode.react": "^4.2.0",
     "hyphenation.de": "^0.2.1",
     "hypher": "^0.2.5",
     "i18next": "^23.16.4",

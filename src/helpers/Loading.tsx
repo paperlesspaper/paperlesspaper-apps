@@ -47,11 +47,21 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 
   // Function to update loading status
   const setLoadingStatus = useCallback((id: string, loading: boolean) => {
-    setLoadingStatuses((prevStatuses) =>
-      prevStatuses.map((status) =>
-        status.id === id ? { ...status, loading } : status
-      )
-    );
+    setLoadingStatuses((prevStatuses) => {
+      let hasChanges = false;
+      const nextStatuses = prevStatuses.map((status) => {
+        if (status.id !== id) {
+          return status;
+        }
+        if (status.loading === loading) {
+          return status;
+        }
+        hasChanges = true;
+        return { ...status, loading };
+      });
+
+      return hasChanges ? nextStatuses : prevStatuses;
+    });
   }, []);
 
   // Function to check if all hooks are finished loading

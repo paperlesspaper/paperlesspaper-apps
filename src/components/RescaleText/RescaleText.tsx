@@ -4,10 +4,11 @@ import React, {
   useEffect,
   useRef,
   CSSProperties,
+  HTMLAttributes,
   ReactNode,
 } from "react";
 
-interface RescaleTextProps {
+interface RescaleTextProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   style?: CSSProperties;
   checkHeight?: boolean;
@@ -25,6 +26,7 @@ const RescaleText: React.FC<RescaleTextProps> = ({
   id = "no-id",
   ellipsis = false,
   ellipsisChars = "...",
+  ...rest
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [fontSize, setFontSize] = useState<number>(maxFontSize);
@@ -105,6 +107,8 @@ const RescaleText: React.FC<RescaleTextProps> = ({
   return (
     <div
       ref={containerRef}
+      {...rest}
+      id={id}
       style={{
         ...style,
         fontSize: ellipsis ? undefined : `${fontSize}px`,

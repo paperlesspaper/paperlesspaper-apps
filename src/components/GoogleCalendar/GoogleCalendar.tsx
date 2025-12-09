@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import classnames from "classnames";
 import EventCard from "./EventCard";
 import RescaleText from "../RescaleText/RescaleText";
-import { LoadingProvider } from "@/helpers/Loading";
+import { LoadingProvider, useLoading } from "@/helpers/Loading";
 
 const DEFAULT_DAY_RANGE = 3;
 const DEFAULT_MAX_EVENTS = 50;
@@ -74,6 +74,7 @@ const toDate = (value?: string): Date | null => {
   return Number.isNaN(parsed.getTime()) ? null : parsed;
 };
 
+/* 
 const isSameDay = (a: Date, b: Date): boolean => {
   return (
     a.getFullYear() === b.getFullYear() &&
@@ -81,6 +82,7 @@ const isSameDay = (a: Date, b: Date): boolean => {
     a.getDate() === b.getDate()
   );
 };
+*/
 
 export type EventData = {
   kind: string;
@@ -102,7 +104,7 @@ type EventBucket = {
   items: ProcessedEvent[];
 };
 
-export default function GoogleCalendar(): JSX.Element {
+function GoogleCalendarContent(): JSX.Element {
   const [eventsData, setEventsData] = useState<EventData[]>([
     {
       kind: "calendar#event",
@@ -217,7 +219,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -252,7 +254,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -287,7 +289,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -322,7 +324,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -357,7 +359,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -392,7 +394,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -427,7 +429,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -462,7 +464,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -497,7 +499,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -532,7 +534,7 @@ export default function GoogleCalendar(): JSX.Element {
         "https://www.google.com/calendar/event?eid=NjBvMzZkcjE3MWgzNmI5aGNnb204YjlrNjFqNjRiOW82b3AzMGJiMmNwaGowb2I1NjBzNjJwaGpjYyA0NjdlZDk1ZGZiNWEyYmE0NjE1MDBjY2JhMTZhN2MwYWU2YjE3NDdhMTNhMjVkY2ViMTUzMjcwY2Y4YjI5NGNmQGc",
       created: "2025-09-24T10:56:16.000Z",
       updated: "2025-09-24T10:56:16.989Z",
-      summary: "Dankesessen bei Anna?",
+      summary: "Example event",
       creator: {
         email: "c.schier92@googlemail.com",
       },
@@ -559,6 +561,8 @@ export default function GoogleCalendar(): JSX.Element {
       eventType: "default",
     },
   ]);
+
+  const setLoading = useLoading({ id: "google-calendar-events" });
 
   const searchParams = useSearchParams();
 
@@ -596,10 +600,25 @@ export default function GoogleCalendar(): JSX.Element {
   );
 
   useEffect(() => {
+    let completionTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const finishLoadingWithDelay = () => {
+      if (completionTimer) {
+        clearTimeout(completionTimer);
+      }
+      completionTimer = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+    };
+
+    setLoading(true);
+
     const handleMessage = (event: MessageEvent) => {
       if (event.data && event.data.cmd === "message") {
         console.log("Received data:", event.data.data);
+        setLoading(true);
         setEventsData(event.data.data);
+        finishLoadingWithDelay();
       }
     };
 
@@ -607,8 +626,11 @@ export default function GoogleCalendar(): JSX.Element {
 
     return () => {
       window.removeEventListener("message", handleMessage);
+      if (completionTimer) {
+        clearTimeout(completionTimer);
+      }
     };
-  }, []);
+  }, [setLoading]);
 
   const processedEvents = useMemo<ProcessedEvent[]>(() => {
     const windowStart = new Date();
@@ -714,44 +736,50 @@ export default function GoogleCalendar(): JSX.Element {
   console.log("GoogleCalendar render", processedEvents);
 
   return (
-    <LoadingProvider>
-      <div className={classNames}>
-        {todayBanner && (
-          <div className={styles.todayBanner} style={todayBannerStyle}>
-            {/* todayBanner.relativeLabel && (
-            <span className={styles.todayBannerHint}>
-              {todayBanner.relativeLabel}
-            </span>
-          ) */}
-            <span className={styles.todayBannerWeekday}>
-              {todayBanner.weekdayLabel}
-            </span>
-            <time
-              className={styles.todayBannerDate}
-              dateTime={todayBanner.isoString}
-            >
-              {todayBanner.dateLabel}
-            </time>
-          </div>
-        )}
-
-        <div className={styles.dayCalendarContent}>
-          <RescaleText id="google-calendar" maxFontSize={17} checkHeight>
-            <div className={styles.dayCalendarInside}>
-              {groupedEvents.map(({ key, label, items }) => (
-                <div key={key} className={styles.dayGroup}>
-                  {shouldShowDayHeaders && label && (
-                    <div className={styles.dayHeader}>{label}</div>
-                  )}
-                  {items.map(({ event }, i) => (
-                    <EventCard key={event.id || `${key}-${i}`} event={event} />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </RescaleText>
+    <div className={classNames}>
+      {todayBanner && (
+        <div className={styles.todayBanner} style={todayBannerStyle}>
+          {/* todayBanner.relativeLabel && (
+          <span className={styles.todayBannerHint}>
+            {todayBanner.relativeLabel}
+          </span>
+        ) */}
+          <span className={styles.todayBannerWeekday}>
+            {todayBanner.weekdayLabel}
+          </span>
+          <time
+            className={styles.todayBannerDate}
+            dateTime={todayBanner.isoString}
+          >
+            {todayBanner.dateLabel}
+          </time>
         </div>
+      )}
+
+      <div className={styles.dayCalendarContent}>
+        <RescaleText id="google-calendar" maxFontSize={17} checkHeight>
+          <div className={styles.dayCalendarInside}>
+            {groupedEvents.map(({ key, label, items }) => (
+              <div key={key} className={styles.dayGroup}>
+                {shouldShowDayHeaders && label && (
+                  <div className={styles.dayHeader}>{label}</div>
+                )}
+                {items.map(({ event }, i) => (
+                  <EventCard key={event.id || `${key}-${i}`} event={event} />
+                ))}
+              </div>
+            ))}
+          </div>
+        </RescaleText>
       </div>
+    </div>
+  );
+}
+
+export default function GoogleCalendar(): JSX.Element {
+  return (
+    <LoadingProvider>
+      <GoogleCalendarContent />
     </LoadingProvider>
   );
 }
