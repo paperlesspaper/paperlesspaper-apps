@@ -8,6 +8,7 @@
 
   background: var(--background);
   color: var(--foreground);
+  position: relative;
 }
 
 .dark {
@@ -30,4 +31,14 @@
 .red-light {
   background: #fff;
   color: #ff0000;
+}
+
+.updatedAt {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--foreground);
+  // opacity: 0.85;
+  text-align: right;
 }

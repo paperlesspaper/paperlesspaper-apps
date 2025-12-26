@@ -5,18 +5,24 @@ import type { EventData } from "./GoogleCalendar";
 
 type EventCardProps = {
   event: EventData;
+  language: string;
 };
 
-const EventCard = ({ event }: EventCardProps) => {
+const EventCard = ({ event, language }: EventCardProps) => {
   const { summary, /* description, */ start, end } = event;
+  const timeZone = start.timeZone || end.timeZone;
 
   const formatTime = (dateTime?: string) => {
     if (!dateTime) {
       return "";
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const options: any = { hour: "2-digit", minute: "2-digit" };
-    return new Date(dateTime).toLocaleTimeString("de-DE", options);
+    const options: any = {
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone,
+    };
+    return new Date(dateTime).toLocaleTimeString(language, options);
   };
 
   useTranslationFromUrl();

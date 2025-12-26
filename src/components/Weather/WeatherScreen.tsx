@@ -22,6 +22,7 @@ export default function WeatherScreen() {
   const location = searchParams.get("location") || "Berlin";
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "forecast-summary"; // default, today-forecast, 3-days
+  const displayLastUpdated = searchParams.get("displayLastUpdated") === "true";
 
   //const showTime = searchParams.get("showTime") === "true";
   // const language = searchParams.get("language") || "en-US";
@@ -80,6 +81,30 @@ export default function WeatherScreen() {
       ? ForecastOnly
       : CurrentWeather;
 
+  const formattedUpdateTime = (() => {
+    const unixSeconds = weatherData?.currentWeather?.dt;
+    if (!unixSeconds) {
+      return null;
+    }
+
+    const timestamp = Number(unixSeconds) * 1000;
+    if (Number.isNaN(timestamp)) {
+      return null;
+    }
+
+    try {
+      return new Date(timestamp).toLocaleString(language, {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+    } catch (error) {
+      return new Date(timestamp).toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+    }
+  })();
+
   if (!weatherData) {
     return null;
   }
@@ -90,6 +115,9 @@ export default function WeatherScreen() {
 
   return (
     <div className={classNames}>
+      {displayLastUpdated && formattedUpdateTime ? (
+        <div className={styles.updatedAt}>{formattedUpdateTime}</div>
+      ) : null}
       <Design weatherData={weatherData} language={language} />
     </div>
   );
