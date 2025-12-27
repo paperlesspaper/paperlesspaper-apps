@@ -14,23 +14,25 @@
 .dark {
   --background: #000;
   --foreground: #fff;
-  --accent: #ff0000;
+  --accent: #fff;
 }
 
 .light {
   --background: #fff;
   --foreground: #000;
-  --accent: #ff0000;
+  --accent: #000;
 }
 
 .red-dark {
-  background: #ff0000;
-  color: #fff;
+  --background: #000;
+  --color: #fff;
+  --accent: #ff0000;
 }
 
 .red-light {
   background: #fff;
-  color: #ff0000;
+  color: #000;
+  --accent: #ff0000;
 }
 
 .updatedAt {

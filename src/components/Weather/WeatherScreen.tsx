@@ -20,7 +20,7 @@ export default function WeatherScreen() {
   const searchParams = useSearchParams();
 
   const location = searchParams.get("location") || "Berlin";
-  const color = searchParams.get("color") || "dark";
+  const color = searchParams.get("color") || "light";
   const kind = searchParams.get("kind") || "forecast-summary"; // default, today-forecast, 3-days
   const displayLastUpdated = searchParams.get("displayLastUpdated") === "true";
 

@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RescaleText from "../RescaleText/RescaleText";
 import styles from "./forecastSummary.module.scss";
 import { Trans } from "react-i18next";
+import { weatherIconMap } from "./weatherIconMap";
 
 export default function ForecastSummary({ language, weatherData }: any) {
   const { currentWeather, forecast } = weatherData;
@@ -59,30 +61,44 @@ export default function ForecastSummary({ language, weatherData }: any) {
             </span>
           </h3>
           <div className={styles.todayForecastContent}>
-            {forecast.list.slice(0, 4).map((day: any) => (
-              <>
-                <div className={styles.forecastDate}>
-                  <span className={styles.forecastTime}>
-                    {new Date(day.dt * 1000).toLocaleTimeString(language, {
-                      hour: "2-digit",
-                    })}
-                  </span>
-                </div>
+            {forecast.list.slice(0, 4).map((day: any) => {
+              const iconConfig = weatherIconMap[day.weather[0].icon];
+              const iconClass = iconConfig?.className
+                ? styles[iconConfig.className]
+                : "";
 
-                <div className={styles.forecastDescription}>
-                  <img
-                    className={styles.forecastIcon}
-                    src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`}
-                    alt="weather icon"
-                  />
-                </div>
-                <div className={styles.forecastTemperature}>
-                  <span className={styles.forecastTemperatureText}>
-                    {Math.round(day.main.temp)}°C
-                  </span>
-                </div>
-              </>
-            ))}
+              return (
+                <React.Fragment key={day.dt}>
+                  <div className={styles.forecastDate}>
+                    <span className={styles.forecastTime}>
+                      {new Date(day.dt * 1000).toLocaleTimeString(language, {
+                        hour: "2-digit",
+                      })}
+                    </span>
+                  </div>
+
+                  <div className={styles.forecastDescription}>
+                    {iconConfig ? (
+                      <FontAwesomeIcon
+                        icon={iconConfig.icon}
+                        className={`${styles.forecastIconFontAwesome} ${iconClass}`}
+                      />
+                    ) : (
+                      <img
+                        className={styles.forecastIcon}
+                        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`}
+                        alt="weather icon"
+                      />
+                    )}
+                  </div>
+                  <div className={styles.forecastTemperature}>
+                    <span className={styles.forecastTemperatureText}>
+                      {Math.round(day.main.temp)}°C
+                    </span>
+                  </div>
+                </React.Fragment>
+              );
+            })}
           </div>
         </div>
 
@@ -94,10 +110,13 @@ export default function ForecastSummary({ language, weatherData }: any) {
           </h3>
           <div className={styles.outlookContent}>
             {summarizedData.slice(0, 3).map((daySummary: any) => {
-              console.log("daySummary", daySummary);
+              const iconConfig = weatherIconMap[daySummary.icon];
+              const iconClass = iconConfig?.className
+                ? styles[iconConfig.className]
+                : "";
 
               return (
-                <>
+                <React.Fragment key={daySummary.date}>
                   <div className={styles.forecastDate}>
                     <span className={styles.forecastTime}>
                       {new Date(daySummary.date).toLocaleDateString(language, {
@@ -106,11 +125,18 @@ export default function ForecastSummary({ language, weatherData }: any) {
                     </span>
                   </div>
                   <div className={styles.forecastDescription}>
-                    <img
-                      className={styles.forecastIcon}
-                      src={`http://openweathermap.org/img/wn/${daySummary.icon}@4x.png`}
-                      alt="weather icon"
-                    />
+                    {iconConfig ? (
+                      <FontAwesomeIcon
+                        icon={iconConfig.icon}
+                        className={`${styles.forecastIconFontAwesome} ${iconClass}`}
+                      />
+                    ) : (
+                      <img
+                        className={styles.forecastIcon}
+                        src={`http://openweathermap.org/img/wn/${daySummary.icon}@4x.png`}
+                        alt="weather icon"
+                      />
+                    )}
                   </div>
                   <div className={styles.forecastTemperature}>
                     <span className={styles.forecastTemperatureText}>
@@ -118,7 +144,7 @@ export default function ForecastSummary({ language, weatherData }: any) {
                       {Math.round(daySummary.maxTemp)}°C
                     </span>
                   </div>
-                </>
+                </React.Fragment>
               );
             })}
           </div>

@@ -6,7 +6,7 @@
   align-items: center;
   font-family: var(--font-open-sans-condensed), serif;
   padding: 0;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   text-align: center;
 }
 
@@ -15,6 +15,13 @@
 
   @include horizontal {
     flex-direction: column;
+  }
+  --cloud-color: #0000ff;
+  --moon-color: #0000ff;
+
+  :global(.dark) & {
+    --cloud-color: #4c4cff;
+    --moon-color: #4c4cff;
   }
   width: 100%;
   align-items: center;
@@ -76,7 +83,7 @@
   text-shadow: -0.3px -0.3px 0 var(--accent), 0.3px -0.3px 0 var(--accent),
     -0.3px 0.3px 0 var(--accent), 0.3px 0.3px 0 var(--accent);
   @include horizontal {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
   }
   text-transform: uppercase;
   letter-spacing: 0.3em;
@@ -91,7 +98,7 @@
     position: absolute;
     top: -2px;
     background: var(--accent);
-    margin-top: 0.5em;
+    margin-top: 0.58em;
   }
 
   span {
@@ -119,7 +126,7 @@
 .todayForecast {
   margin-bottom: 1.2em;
   @include horizontal {
-    margin-bottom: 1.1em;
+    margin-bottom: 1.4em;
   }
 }
 
@@ -146,6 +153,73 @@
   :global(.light) & {
     filter: brightness(0.6) contrast(2);
   }
+}
+
+.forecastIconFontAwesome {
+  font-size: 1.5em;
+  margin: 0.4em 0;
+  --fa-secondary-opacity: 1;
+}
+
+.iconSun {
+  --fa-primary-color: #ffbb00; /* yellow */
+  --fa-secondary-color: #ff0000; /* red */
+  :global(.dark) & {
+    --fa-primary-color: #ffd900;
+    --fa-secondary-color: #ffd900;
+  }
+}
+
+.iconMoon {
+  --fa-primary-color: #ffbb00; /* yellow */
+  --fa-secondary-color: var(--moon-color); /* blue */
+  :global(.dark) & {
+    --fa-primary-color: #ffd900;
+  }
+}
+
+.iconCloud {
+  --fa-primary-color: var(--cloud-color); /* blue */
+  --fa-secondary-color: var(--cloud-color); /* blue */
+}
+
+.iconCloudNight {
+  --fa-primary-color: var(--cloud-color); /* blue */
+  --fa-secondary-color: #ffbb00; /* black */
+  :global(.dark) & {
+    --fa-secondary-color: #ffd900;
+  }
+}
+
+.iconSunRain {
+  --fa-primary-color: var(--cloud-color); /* blue */
+  --fa-secondary-color: #ffbb00; /* black */
+  :global(.dark) & {
+    --fa-secondary-color: #ffd900;
+  }
+}
+
+.iconRain {
+  --fa-primary-color: #ababff; /* blue */
+  --fa-secondary-color: var(--cloud-color); /* blue */
+}
+
+.iconThunder {
+  --fa-primary-color: #ffbb00; /* yellow */
+  --fa-secondary-color: #000000; /* black */
+  :global(.dark) & {
+    --fa-primary-color: #ffd900;
+  }
+}
+
+.iconSnow {
+  --fa-primary-color: #ffffff; /* white */
+  --fa-secondary-color: var(--cloud-color); /* blue */
+}
+
+.iconFog {
+  --fa-primary-color: #ffffff; /* white */
+  --fa-secondary-color: #000000; /* black */
 }
 
 .outlookContent {
