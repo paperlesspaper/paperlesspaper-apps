@@ -109,7 +109,7 @@ export default function ForecastSummary({ language, weatherData }: any) {
             </span>
           </h3>
           <div className={styles.outlookContent}>
-            {summarizedData.slice(0, 3).map((daySummary: any) => {
+            {summarizedData.slice(1, 4).map((daySummary: any) => {
               const iconConfig = weatherIconMap[daySummary.icon];
               const iconClass = iconConfig?.className
                 ? styles[iconConfig.className]

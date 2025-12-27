@@ -6,7 +6,9 @@
   align-items: center;
   font-family: var(--font-open-sans-condensed), serif;
   padding: 0;
-  margin-bottom: 30px;
+  @include horizontal {
+    margin-bottom: 30px;
+  }
   text-align: center;
 }
 
@@ -164,7 +166,8 @@
 .iconSun {
   --fa-primary-color: #ffbb00; /* yellow */
   --fa-secondary-color: #ff0000; /* red */
-  :global(.dark) & {
+  :global(.dark) &,
+  :global(.red-dark) & {
     --fa-primary-color: #ffd900;
     --fa-secondary-color: #ffd900;
   }
@@ -173,7 +176,8 @@
 .iconMoon {
   --fa-primary-color: #ffbb00; /* yellow */
   --fa-secondary-color: var(--moon-color); /* blue */
-  :global(.dark) & {
+  :global(.dark) &,
+  :global(.red-dark) & {
     --fa-primary-color: #ffd900;
   }
 }
@@ -186,7 +190,8 @@
 .iconCloudNight {
   --fa-primary-color: var(--cloud-color); /* blue */
   --fa-secondary-color: #ffbb00; /* black */
-  :global(.dark) & {
+  :global(.dark) &,
+  :global(.red-dark) & {
     --fa-secondary-color: #ffd900;
   }
 }
@@ -194,7 +199,8 @@
 .iconSunRain {
   --fa-primary-color: var(--cloud-color); /* blue */
   --fa-secondary-color: #ffbb00; /* black */
-  :global(.dark) & {
+  :global(.dark) &,
+  :global(.red-dark) & {
     --fa-secondary-color: #ffd900;
   }
 }
@@ -207,14 +213,21 @@
 .iconThunder {
   --fa-primary-color: #ffbb00; /* yellow */
   --fa-secondary-color: #000000; /* black */
-  :global(.dark) & {
+  :global(.dark) &,
+  :global(.red-dark) & {
     --fa-primary-color: #ffd900;
   }
 }
 
 .iconSnow {
-  --fa-primary-color: #ffffff; /* white */
-  --fa-secondary-color: var(--cloud-color); /* blue */
+  --fa-primary-color: #000;
+  --fa-secondary-color: #000;
+
+  :global(.dark) &,
+  :global(.red-dark) & {
+    --fa-primary-color: #fff;
+    --fa-secondary-color: #fff;
+  }
 }
 
 .iconFog {
