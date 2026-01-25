@@ -29,7 +29,7 @@ interface RssData {
   };
 }
 
-export default function Day(): JSX.Element | null {
+export default function Day() {
   const searchParams = useSearchParams();
 
   const feed = searchParams.get("feed") as string;

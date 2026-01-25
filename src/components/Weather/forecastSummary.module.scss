@@ -163,6 +163,10 @@
   --fa-secondary-opacity: 1;
 }
 
+.iconMonochrome {
+  color: var(--foreground);
+}
+
 .iconSun {
   --fa-primary-color: #ffbb00; /* yellow */
   --fa-secondary-color: #ff0000; /* red */

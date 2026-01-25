@@ -70,12 +70,6 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     (loadingStatuses.length > 0 &&
       loadingStatuses.every((status) => !status.loading));
 
-  console.info(
-    `Loading statuses: ${JSON.stringify(
-      loadingStatuses
-    )}, allFinishedLoading: ${allFinishedLoading}`
-  );
-
   return (
     <LoadingContext.Provider
       value={{ registerLoading, setLoadingStatus, allFinishedLoading }}

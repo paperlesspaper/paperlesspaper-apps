@@ -4,10 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RescaleText from "../RescaleText/RescaleText";
 import styles from "./forecastSummary.module.scss";
 import { Trans } from "react-i18next";
-import { weatherIconMap } from "./weatherIconMap";
+import { weatherIconMap, weatherIconMapLight } from "./weatherIconMap";
 
-export default function ForecastSummary({ language, weatherData }: any) {
+export default function ForecastSummary({
+  language,
+  weatherData,
+  iconStyle = "normal",
+}: any) {
   const { currentWeather, forecast } = weatherData;
+  const iconMap = iconStyle === "light" ? weatherIconMapLight : weatherIconMap;
 
   const summarizedData = Object.values(
     forecast.list.reduce((acc: any, entry: any) => {
@@ -62,7 +67,7 @@ export default function ForecastSummary({ language, weatherData }: any) {
           </h3>
           <div className={styles.todayForecastContent}>
             {forecast.list.slice(0, 4).map((day: any) => {
-              const iconConfig = weatherIconMap[day.weather[0].icon];
+              const iconConfig = iconMap[day.weather[0].icon];
               const iconClass = iconConfig?.className
                 ? styles[iconConfig.className]
                 : "";
@@ -110,7 +115,7 @@ export default function ForecastSummary({ language, weatherData }: any) {
           </h3>
           <div className={styles.outlookContent}>
             {summarizedData.slice(1, 4).map((daySummary: any) => {
-              const iconConfig = weatherIconMap[daySummary.icon];
+              const iconConfig = iconMap[daySummary.icon];
               const iconClass = iconConfig?.className
                 ? styles[iconConfig.className]
                 : "";

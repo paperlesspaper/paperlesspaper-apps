@@ -1,85 +1,108 @@
-These are [paperlesspaper](https://paperlesspaper.de/en) Integrations, that renders different tools in a suitable size for eInk Displays using a next.js application.
+# paperlesspaper apps
+
+This repository contains [paperlesspaper](https://paperlesspaper.de/en) integrations rendered for eInk displays. It is a Next.js app optimized for fixed-size, low-color layouts and screenshot-based rendering.
 
 ![Example image](https://paperlesspaper.de/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fwirewire%2Fimage%2Fupload%2FIMG_3151-Bearbeitet.jpg.jpg&w=2048&h=700&q=75)
 
-### Available integrations
+## Quick start
 
-#### Google Calendar
+1. Install dependencies.
+2. Start the dev server (defaults to http://localhost:3001).
 
-Connect to your Google Calendar. You need to provide the data for the calendar using `window.postMessage`.
+```
+npm install
+npm run dev
+```
 
-#### Weather
+## Available integrations
 
-Displays the current weather and weather forecast for any location using [Openweathermap.org](https://openweathermap.org).
+### [Google Calendar](src/components/GoogleCalendar/README.md)
 
-#### Wikipedia
+Connect to your Google Calendar. Data is provided via `window.postMessage`.
 
-Shows the Wikipedia "Article of the day" or "What happend on.." using the Wikipedia API. Available in English and German.
+### [Weather](src/components/Weather/README.md)
 
-#### RSS
+Displays current weather and forecast for any location using OpenWeather data.
 
-Displays any RSS-feed.
+### [Wikipedia](src/components/Wikipedia/README.md)
 
-#### Apotheken-Notdienst
+Shows the Wikipedia “Article of the day” or “On this day”. Available in English and German.
 
-Shows pharmacies on emergency duty in Germany using the public search endpoint of [aponet.de](https://www.aponet.de/apotheke/notdienstsuche/). Supports the same configuration surface as the MagicMirror² module and exposes the data through `/api/apothekennotdienst`.
+### [RSS](src/components/Rss/README.md)
 
-### Features
+Displays any RSS feed.
+
+### [Apotheken-Notdienst](src/components/ApothekenNotdienst/README.md)
+
+Shows pharmacies on emergency duty in Germany using the public search endpoint of [aponet.de](https://www.aponet.de/apotheke/notdienstsuche/). Exposes data via `/api/apothekennotdienst`.
+
+Additional routes live in [src/app](src/app).
+
+## Open Integration Example (plugin provider)
+
+This repo ships an example provider for the Open Integration system used by memo-mono.
+
+- Manifest (install URL): /open-integration-example/config.json
+- Settings page (iframe): /open-integration-example/settings
+- Render page (Puppeteer target): /open-integration-example/render
+- Mock OAuth/redirect helper (optional): /open-integration-example/auth
+
+Local install into memo-mono:
+
+1. Start this repo (defaults to http://localhost:3001).
+2. In memo-mono, choose the Integration Plugin application.
+3. Install by config URL:
+
+http://localhost:3001/open-integration-example/config.json
+
+The settings iframe supports both structured messages (`{ source: "wirewire-app", type: "INIT" | "REDIRECT", ... }`) and the legacy `{ cmd: "message" | "redirect", data: ... }` format.
+
+## Features
 
 - Style selection
-- Optimized for 7 color AcEP eInk displays (Spectra 6 coming soon)
-- Optimization for fitting the screen
-- Horizontal and vertical usage
-- Multilanguage (TODO: Extract all language strings automatically)
+- Optimized for 7-color AcEP eInk displays (Spectra 6 coming soon)
+- Layout fitting and auto-scaling
+- Horizontal and vertical layouts
+- Multilanguage support (see [src/i18n](src/i18n))
 
-### Tools
+## Components
 
-#### `RescaleText`
+### `RescaleText`
 
-`RescaleText` tries fitting the text into it's container.
+Fits text into its container by adjusting font size.
 
-#### Properties
+Properties:
 
-```bash
+```
 checkHeight = false
 maxFontSize = 100
 id = "no-id"
 ```
 
-#### Usage with paperlesspaper
+## Usage with paperlesspaper
 
-There is nothing you need to do. You can access each integration when creating a new image inside the app.
+No extra setup is required. Each integration appears inside paperlesspaper when creating a new image.
 
-### Usage with custom ePaper displays
+## Usage with custom ePaper displays
 
-You need to convert the website into a picture.
+You need to render a route to an image and transmit it to the display.
 
-Steps:
+Typical steps:
 
-- Convert the website into a picture using [pupeteer](https://pptr.dev/)
-- Additional compare image to avoid sending the same image twice
-- Dither image
-- Transmit dithered image
+1. Render the route using Puppeteer.
+2. Compare against the previous image to avoid redundant uploads.
+3. Dither the image.
+4. Transmit the dithered image to the display.
 
-### ADD_LINK_TO_TUTORIAL_HERE
+## Puppeteer rendering contract
 
-TODO: Add pupeteer converter directly to API Route.
-
-https://github.com/browserless/vercel-puppeteer/blob/main/src/pages/api/pdf.ts
-
-### Special DOM Elements for Puppeteer Rendering
-
-To coordinate rendering and screenshot timing, the backend expects certain elements to be present in the DOM of the page being rendered. These elements are used to detect loading states and ensure screenshots are taken only after the page is fully ready.
+The backend detects loading states based on the presence of these DOM elements.
 
 ### `#website-has-loading-element`
 
-#### Purpose:
+Indicates that the page has a custom loading state. If this element exists, the backend waits for loading to finish before taking a screenshot.
 
-Indicates that the page has a custom loading state. If this element exists in the DOM, the backend will wait for the loading to finish before taking a screenshot.
-
-#### Usage:
-
-Add an element with the ID website-has-loading-element to your page while it is loading.
+Add while loading:
 
 ```html
 <div id="website-has-loading-element" />
@@ -87,32 +110,28 @@ Add an element with the ID website-has-loading-element to your page while it is 
 
 ### `#website-has-loaded`
 
-#### Purpose:
+Signals that the page is fully loaded and ready for rendering. The backend waits for this element to appear before proceeding.
 
-Signals that the page has finished loading and is ready for rendering. The backend waits for this element to appear before proceeding.
-
-#### Usage:
-
-Once your page is fully loaded and ready for a screenshot, add an element with the ID website-has-loaded to the DOM.
+Add when ready:
 
 ```html
 <div id="website-has-loaded" />
 ```
 
-### Fallback Behavior
+### Fallback behavior
 
-If `#website-has-loading-element` is not found, the backend will wait for a fixed timeout (8.5 seconds) before taking a screenshot. This is a fallback to handle pages without explicit loading indicators.
+If `#website-has-loading-element` is not found, the backend waits a fixed timeout (8.5 seconds) before taking a screenshot.
 
-## Loading helper (react.js)
+## Loading helper (React)
 
-A context provider that tracks the loading status of registered operations. Wrap your application (or a subtree) with this provider to enable loading state management.
+A context provider that tracks the loading status of registered operations. Wrap your app (or a subtree) with this provider to enable loading state management.
 
-**Props:**
+Props:
 
-- `children`: ReactNode — The content to render inside the provider.
+- `children`: ReactNode
 - `finishedLoading` (optional): boolean — If set to `true`, marks all as loaded regardless of internal state.
 
-**Behavior:**
+Behavior:
 
 - Renders a `<div id="website-has-loaded" />` when all registered operations are finished loading.
 - Renders a `<div id="website-is-loading" />` when any operation is still loading.
@@ -120,17 +139,17 @@ A context provider that tracks the loading status of registered operations. Wrap
 
 ### `useLoading`
 
-A custom hook to register and update the loading status of a component or operation.
+Registers and updates a loading operation.
 
-**Arguments:**
+Arguments:
 
-- `id`: string — A unique identifier for the loading operation. If not provided, a random one is generated.
+- `id`: string — Unique identifier for the loading operation.
 
-**Returns:**
+Returns:
 
-- `setLoading`: (loading: boolean) => void — Call this function to update the loading status for the given id.
+- `setLoading`: (loading: boolean) => void
 
-**Usage Example:**
+Usage example:
 
 ```tsx
 import { useLoading } from "../helpers/Loading";
@@ -142,28 +161,15 @@ const MyComponent = () => {
     setLoading(true);
     fetchData().finally(() => setLoading(false));
   }, []);
-
-  // ...
 };
 ```
 
-## Internal Details
+## Development
 
-- The context tracks an array of `{ id, loading }` objects.
-- `registerLoading(id)` adds a new loading operation if not already present.
-- `setLoadingStatus(id, loading)` updates the loading state for a given id.
-- `allFinishedLoading` is `true` if all registered operations are not loading, or if `finishedLoading` is set.
+Scripts:
 
-### Development
-
-Install dependencies using `npm`.
-
-```
-npm install
-```
-
-Start the development environment
-
-```
-npm dev
-```
+- `npm run dev` — Start Next.js on port 3001
+- `npm run build` — Build for production
+- `npm run start` — Run the production server
+- `npm run lint` — Lint the codebase
+- `npm run deploy` — Deploy via Vercel

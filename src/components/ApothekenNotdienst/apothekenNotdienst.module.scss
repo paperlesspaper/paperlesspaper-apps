@@ -149,6 +149,9 @@
   &:nth-child(2n) {
     border-right: none;
   }
+  @include horizontal {
+    border-right: none;
+  }
 }
 
 .cardHeader {

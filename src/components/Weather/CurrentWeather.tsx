@@ -23,6 +23,7 @@ type WeatherData = {
 type CurrentWeatherProps = {
   language: string;
   weatherData: WeatherData;
+  iconStyle?: string;
 };
 
 export default function CurrentWeather({ weatherData }: CurrentWeatherProps) {

@@ -23,6 +23,7 @@ export default function WeatherScreen() {
   const color = searchParams.get("color") || "light";
   const kind = searchParams.get("kind") || "forecast-summary"; // default, today-forecast, 3-days
   const displayLastUpdated = searchParams.get("displayLastUpdated") === "true";
+  const iconStyle = searchParams.get("iconstyle") || "normal";
 
   //const showTime = searchParams.get("showTime") === "true";
   // const language = searchParams.get("language") || "en-US";
@@ -116,9 +117,19 @@ export default function WeatherScreen() {
   return (
     <div className={classNames}>
       {displayLastUpdated && formattedUpdateTime ? (
-        <div className={styles.updatedAt}>{formattedUpdateTime}</div>
+        <div className={styles.updatedAt}>
+          {formattedUpdateTime} – 
+          {new Date().toLocaleString(undefined, {
+            dateStyle: "medium",
+            timeStyle: "short",
+          })}
+        </div>
       ) : null}
-      <Design weatherData={weatherData} language={language} />
+      <Design
+        weatherData={weatherData}
+        language={language}
+        iconStyle={iconStyle}
+      />
     </div>
   );
 }

@@ -154,7 +154,7 @@ const buildDateKey = (event: EventData, eventStart: Date | null): string => {
   return keyFormatter.format(eventStart);
 };
 
-function GoogleCalendarContent(): JSX.Element {
+function GoogleCalendarContent() {
   const [eventsData, setEventsData] = useState<EventData[]>(
     googleCalendarSampleData
   );
@@ -377,7 +377,7 @@ function GoogleCalendarContent(): JSX.Element {
   );
 }
 
-export default function GoogleCalendar(): JSX.Element {
+export default function GoogleCalendar() {
   return (
     <LoadingProvider>
       <GoogleCalendarContent />

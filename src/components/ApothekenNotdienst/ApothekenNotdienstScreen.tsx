@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import classnames from "classnames";
 import { useSearchParams } from "next/navigation";
 import styles from "./apothekenNotdienst.module.scss";
@@ -25,13 +25,13 @@ const MAX_LIMIT = 20;
 
 const clampNumber = (
   value: number,
-  { min, max }: { min: number; max: number }
+  { min, max }: { min: number; max: number },
 ): number => Math.min(Math.max(value, min), max);
 
 const parseFloatParam = (
   value: string | null,
   fallback: number,
-  clamp?: { min: number; max: number }
+  clamp?: { min: number; max: number },
 ): number => {
   if (value === null) {
     return fallback;
@@ -49,7 +49,7 @@ const parseFloatParam = (
 const parseIntegerParam = (
   value: string | null,
   fallback: number,
-  clamp?: { min: number; max: number }
+  clamp?: { min: number; max: number },
 ): number => {
   if (value === null) {
     return fallback;
@@ -130,7 +130,7 @@ type ApiResponse = {
 
 const parseServiceDate = (
   date: string | null,
-  time: string | null
+  time: string | null,
 ): Date | null => {
   if (!date) {
     return null;
@@ -165,7 +165,7 @@ const APONET_PAGE_URL = "https://www.aponet.de/apotheke/notdienstsuche";
 
 const buildAponetSearchResultsUrl = (
   meta: ApiResponse["meta"] | null,
-  fallbackPharmacy?: PharmacyDuty
+  fallbackPharmacy?: PharmacyDuty,
 ): string | null => {
   if (!meta) {
     return null;
@@ -184,7 +184,7 @@ const buildAponetSearchResultsUrl = (
   return `${APONET_PAGE_URL}/${encodedPlzOrt}/${encodedStreet}/${encodedRadius}`;
 };
 
-export default function ApothekenNotdienstScreen(): JSX.Element {
+export default function ApothekenNotdienstScreen() {
   const searchParams = useSearchParams();
 
   const color = searchParams.get("color") || "dark";
@@ -197,12 +197,12 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
   const lat = parseFloatParam(
     searchParams.get("lat"),
     DEFAULT_COORDINATES.lat,
-    { min: -90, max: 90 }
+    { min: -90, max: 90 },
   );
   const lon = parseFloatParam(
     searchParams.get("lon"),
     DEFAULT_COORDINATES.lon,
-    { min: -180, max: 180 }
+    { min: -180, max: 180 },
   );
   const radius = parseIntegerParam(radiusParam, DEFAULT_RADIUS, {
     min: MIN_RADIUS,
@@ -217,7 +217,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
   const refreshIntervalMs = (() => {
     const parsed = parseIntegerParam(
       updateIntervalParam,
-      DEFAULT_REFRESH_INTERVAL
+      DEFAULT_REFRESH_INTERVAL,
     );
     return clampNumber(parsed, {
       min: MIN_REFRESH_INTERVAL,
@@ -250,7 +250,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         hour: "2-digit",
         minute: "2-digit",
       }),
-    [language]
+    [language],
   );
 
   const distanceFormatter = useMemo(
@@ -259,7 +259,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         minimumFractionDigits: 1,
         maximumFractionDigits: 1,
       }),
-    [language]
+    [language],
   );
 
   const updatedFormatter = useMemo(
@@ -270,7 +270,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         day: "2-digit",
         month: "2-digit",
       }),
-    [language]
+    [language],
   );
 
   const latestUpdateLabel = meta?.requestedAt
@@ -307,7 +307,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
           } catch (parseError) {
             console.warn(
               "Unable to parse Apothekennotdienst error",
-              parseError
+              parseError,
             );
           }
           throw new Error(message);
@@ -325,7 +325,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
         }
         console.error("Apothekennotdienst request failed", requestError);
         setError(
-          requestError instanceof Error ? requestError.message : ERROR_SUBTITLE
+          requestError instanceof Error ? requestError.message : ERROR_SUBTITLE,
         );
       } finally {
         if (trackLoading) {
@@ -338,7 +338,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
     fetchData(true);
     intervalRef.current = window.setInterval(
       () => fetchData(false),
-      refreshIntervalMs
+      refreshIntervalMs,
     );
 
     return () => {
@@ -353,15 +353,15 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
   const formatServiceWindow = (pharmacy: PharmacyDuty): string => {
     const start = parseServiceDate(
       pharmacy.serviceWindow.startDate,
-      pharmacy.serviceWindow.startTime
+      pharmacy.serviceWindow.startTime,
     );
     const end = parseServiceDate(
       pharmacy.serviceWindow.endDate,
-      pharmacy.serviceWindow.endTime
+      pharmacy.serviceWindow.endTime,
     );
     if (start && end) {
       return `${serviceFormatter.format(start)} – ${serviceFormatter.format(
-        end
+        end,
       )}`;
     }
     if (pharmacy.serviceWindow.startDate && pharmacy.serviceWindow.endDate) {
@@ -379,7 +379,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
     color && styles[color as keyof typeof styles],
     kind && styles[kind as keyof typeof styles],
     color,
-    kind
+    kind,
   );
 
   const showSkeleton = isInitialLoad;
@@ -389,7 +389,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
 
   const searchResultsUrl = useMemo(
     () => buildAponetSearchResultsUrl(meta, pharmacies[0]),
-    [meta, pharmacies]
+    [meta, pharmacies],
   ) as string;
 
   return (
@@ -486,7 +486,7 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
                           />
                         )}
                         {DISTANCE_LABEL(
-                          distanceFormatter.format(pharmacy.distanceKm)
+                          distanceFormatter.format(pharmacy.distanceKm),
                         )}
                       </span>
                     ) : null}
@@ -509,15 +509,15 @@ export default function ApothekenNotdienstScreen(): JSX.Element {
                       pharmacy.contact.faxNumbers.length > 0 ||
                       pharmacy.contact.emails.length > 0) && (
                       <div className={styles.serviceWindow}>
-                        {pharmacy.contact.phones.map((phone) => (
-                          <>
+                        {pharmacy.contact.phones.map((phone, i) => (
+                          <React.Fragment key={i}>
                             <span className={styles.serviceLabel}>
                               {PHONE_LABEL}
                             </span>
                             <a href={`tel:${sanitizePhoneHref(phone)}`}>
                               {phone}
                             </a>
-                          </>
+                          </React.Fragment>
                         ))}
                       </div>
                     )}
