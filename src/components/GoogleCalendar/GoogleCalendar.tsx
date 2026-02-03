@@ -16,7 +16,7 @@ const DEFAULT_HIGHLIGHT_SCALE = 1.35;
 
 const clampNumber = (
   value: number | undefined,
-  { min, max, fallback }: { min: number; max: number; fallback: number }
+  { min, max, fallback }: { min: number; max: number; fallback: number },
 ) => {
   if (!Number.isFinite(value)) {
     return fallback;
@@ -26,7 +26,7 @@ const clampNumber = (
 
 const parseIntegerParam = (
   value: string | null,
-  { min, max, fallback }: { min: number; max: number; fallback: number }
+  { min, max, fallback }: { min: number; max: number; fallback: number },
 ) => {
   if (!value) {
     return fallback;
@@ -41,7 +41,7 @@ const parseIntegerParam = (
 
 const parseFloatParam = (
   value: string | null,
-  { min, max, fallback }: { min: number; max: number; fallback: number }
+  { min, max, fallback }: { min: number; max: number; fallback: number },
 ) => {
   if (!value) {
     return fallback;
@@ -113,7 +113,7 @@ const getEventTimeZone = (event: EventData): string | undefined => {
 const formatDateLabel = (
   event: EventData,
   eventStart: Date | null,
-  locale: string
+  locale: string,
 ): string => {
   const timeZone = getEventTimeZone(event);
   const formatter = new Intl.DateTimeFormat(locale, {
@@ -156,7 +156,7 @@ const buildDateKey = (event: EventData, eventStart: Date | null): string => {
 
 function GoogleCalendarContent() {
   const [eventsData, setEventsData] = useState<EventData[]>(
-    googleCalendarSampleData
+    googleCalendarSampleData,
   );
 
   const setLoading = useLoading({ id: "google-calendar-events" });
@@ -181,7 +181,7 @@ function GoogleCalendarContent() {
   });
   const highlightToday = parseBooleanParam(
     searchParams.get("highlightToday"),
-    false
+    false,
   );
   const highlightScale = parseFloatParam(searchParams.get("highlightScale"), {
     min: 1,
@@ -196,7 +196,7 @@ function GoogleCalendarContent() {
       [styles[kind]]: kind,
     },
     color,
-    kind
+    kind,
   );
 
   useEffect(() => {
@@ -217,7 +217,12 @@ function GoogleCalendarContent() {
       if (event.data && event.data.cmd === "message") {
         console.log("Received data:", event.data.data);
         setLoading(true);
-        setEventsData(event.data.data);
+
+        // TODO: Temporary fix until we have unified data format
+        const newEventsdata =
+          event.data.data.calendarData?.events || event.data.data;
+
+        setEventsData(newEventsdata);
         finishLoadingWithDelay();
       }
     };
@@ -238,6 +243,11 @@ function GoogleCalendarContent() {
     const windowEnd = new Date(windowStart);
     windowEnd.setDate(windowStart.getDate() + Math.max(dayRange - 1, 0));
     windowEnd.setHours(23, 59, 59, 999);
+
+    console.log("Filtering events", eventsData, windowStart, windowEnd);
+    if (!eventsData || eventsData.length === 0) {
+      return [];
+    }
 
     return eventsData
       .map((event) => {
@@ -275,7 +285,7 @@ function GoogleCalendarContent() {
     });
 
     return Array.from(buckets.values()).sort((a, b) =>
-      a.key.localeCompare(b.key)
+      a.key.localeCompare(b.key),
     );
   }, [processedEvents, language]);
 

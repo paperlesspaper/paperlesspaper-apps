@@ -35,24 +35,64 @@ a {
   --background: #000;
   --foreground: #fff;
   --accent: #ff0000;
+  --muted: rgba(244, 245, 255, 0.72);
+  --card-border: #fff;
 }
 
 .light {
   --background: #fff;
   --foreground: #000;
   --accent: #ff0000;
+  --muted: rgba(15, 23, 42, 0.65);
+  --card-border: #000;
 }
 
 .red-dark {
-  --background: #ff0000;
+  --background: #000;
   --foreground: #fff;
-  --accent: #fff;
+  --accent: #ff0000;
+  --muted: rgba(244, 245, 255, 0.72);
+  --card-border: #fff;
 }
 
 .red-light {
-  --foreground: #ff0000;
   --background: #fff;
-  --accent: #000;
+  --foreground: #000;
+  --accent: #ff0000;
+  --muted: rgba(15, 23, 42, 0.65);
+  --card-border: #000;
+}
+
+.green-dark {
+  --background: #000;
+  --foreground: #fff;
+  --accent: #00ff00;
+  --muted: rgba(244, 245, 255, 0.72);
+  --card-border: #fff;
+}
+
+.green-light {
+  --background: #fff;
+  --foreground: #000;
+  --accent: #00ff00;
+  --muted: rgba(15, 23, 42, 0.65);
+  --card-border: #000;
+}
+
+.blue-dark {
+  --background: #000;
+  --foreground: #fff;
+  --accent: #0000ff;
+  --muted: rgba(244, 245, 255, 0.72);
+  --card-border: #fff;
+}
+
+.blue-light {
+  --background: #fff;
+  --foreground: #000;
+  --accent: #0000ff;
+  --muted: rgba(15, 23, 42, 0.65);
+  --card-border: #000;
 }
 
 .green {

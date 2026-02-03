@@ -36,6 +36,10 @@ Displays any RSS feed.
 
 Shows pharmacies on emergency duty in Germany using the public search endpoint of [aponet.de](https://www.aponet.de/apotheke/notdienstsuche/). Exposes data via `/api/apothekennotdienst`.
 
+### [Apple Photos (Random)](src/components/ApplePhotosRandom/README.md)
+
+Renders a random image from a public iCloud Shared Album.
+
 Additional routes live in [src/app](src/app).
 
 ## Open Integration Example (plugin provider)
@@ -93,6 +97,8 @@ Typical steps:
 2. Compare against the previous image to avoid redundant uploads.
 3. Dither the image.
 4. Transmit the dithered image to the display.
+
+### How to build an integration
 
 ## Puppeteer rendering contract
 
@@ -162,6 +168,39 @@ const MyComponent = () => {
     fetchData().finally(() => setLoading(false));
   }, []);
 };
+```
+
+### Theme via URL param
+
+The app supports switching the theme (CSS class on `<body>`) via a query param.
+
+- Param name: `color`
+- Supported values:
+  - `dark` | `light`
+  - `red-dark` | `red-light`
+  - `green-dark` | `green-light`
+  - `blue-dark` | `blue-light`
+- Default: `dark`
+
+In these `*-dark` / `*-light` variants, the base (`dark`/`light`) controls background + foreground, and the color controls the highlight (`--accent`).
+
+Examples:
+
+- `/weather?color=light`
+- `/google-calendar?color=dark`
+- `/weather?color=green-dark`
+- `/weather?color=blue-light`
+
+Implementation detail: this is handled globally in `src/app/layout.tsx` via the `ColorVariablesFromParam` component.
+
+#### Usage
+
+In your css file you can use the theme variables like this:
+
+```css
+color: var(--background);
+background: var(--foreground);
+border-top: var(--accent);
 ```
 
 ## Development

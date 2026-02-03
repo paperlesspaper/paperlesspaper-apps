@@ -1,37 +1,14 @@
 @use "../../styles/mixins" as *;
 
 .apotheken {
-  --background: #000;
-  --foreground: #fff;
-  --accent: #ff0000;
-  --muted: rgba(255, 244, 244, 0.72);
-  --card-border: #fff;
   --card-radius: 1.4em;
   --card-padding: clamp(1.2em, 2.4vw, 1.75em);
   min-height: 100vh;
   // padding: clamp(1.5em, 2.8vw, 3em);
-  background: var(--background);
-  color: var(--foreground);
   display: flex;
   flex-direction: column;
   gap: clamp(1em, 2vw, 1.5em);
   font-family: var(--font-open-sans), sans-serif;
-}
-
-.dark {
-  --background: #000;
-  --foreground: #fff;
-  --accent: #ff0000;
-  --muted: rgba(244, 245, 255, 0.72);
-  --card-border: #fff;
-}
-
-.light {
-  --background: #fff;
-  --foreground: #000;
-  --accent: #ff0000;
-  --muted: rgba(15, 23, 42, 0.65);
-  --card-border: #000;
 }
 
 .primary {

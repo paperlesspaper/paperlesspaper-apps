@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Condensed } from "next/font/google";
+import ColorVariablesFromParam from "@/components/Theme/ColorVariablesFromParam";
+import { Suspense } from "react";
 import "./globals.scss";
 
 const roboto = Roboto({
@@ -30,7 +32,12 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body className={`${roboto.variable} ${robotoCondensed.variable}`}>
+      <body
+        className={`${roboto.variable} ${robotoCondensed.variable} wrapper`}
+      >
+        <Suspense fallback={null}>
+          <ColorVariablesFromParam />
+        </Suspense>
         {children}
       </body>
     </html>

@@ -187,7 +187,6 @@ const buildAponetSearchResultsUrl = (
 export default function ApothekenNotdienstScreen() {
   const searchParams = useSearchParams();
 
-  const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "primary";
   const limitParam =
     searchParams.get("maxEntries") || searchParams.get("limit");
@@ -376,9 +375,7 @@ export default function ApothekenNotdienstScreen() {
 
   const classNames = classnames(
     styles.apotheken,
-    color && styles[color as keyof typeof styles],
     kind && styles[kind as keyof typeof styles],
-    color,
     kind,
   );
 

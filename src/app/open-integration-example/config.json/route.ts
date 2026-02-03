@@ -1,22 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { corsHeaders } from "../../../helpers/corsHeaders";
 
 export const dynamic = "force-dynamic";
-
-function corsHeaders(request: NextRequest): Record<string, string> {
-  const origin = request.headers.get("origin");
-
-  // If an Origin is provided, echo it back (needed if the caller sends credentials).
-  // Otherwise fall back to '*'.
-  const allowOrigin = origin || "*";
-
-  return {
-    "access-control-allow-origin": allowOrigin,
-    "access-control-allow-methods": "GET,OPTIONS",
-    "access-control-allow-headers": "content-type, authorization",
-    ...(origin ? { "access-control-allow-credentials": "true" } : {}),
-    ...(origin ? { vary: "Origin" } : {}),
-  };
-}
 
 export async function OPTIONS(request: NextRequest) {
   return new NextResponse(null, {
@@ -37,7 +22,7 @@ export async function GET(request: NextRequest) {
     name: "PaperlessPaper — Open Integration Example",
     version: "0.1.0",
     description: "Demo integration provider hosted in paperlesspaper-apps",
-    icon: `${origin}/open-integration-example/icon.svg`,
+    icon: `${origin}/open-integration-example/icon.png`,
 
     nativeSettings: {
       orientation: "portrait",

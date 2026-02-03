@@ -1,0 +1,180 @@
+@use "../../styles/mixins" as *;
+
+.root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  font-family:
+    var(--font-open-sans),
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    sans-serif;
+
+  :global(.dark) & {
+    --level0: #373d45;
+    --level1: #0e4429;
+    --level2: #006d32;
+    --level3: #26a641;
+    --level4: #39d353;
+  }
+
+  :global(.light) & {
+    --level0: #ebedf0;
+    --level1: #9be9a8;
+    --level2: #40c463;
+    --level3: #30a14e;
+    --level4: #216e39;
+  }
+}
+
+/* Default to GitHub-like dark theme */
+
+.container {
+  width: 100%;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.subTitle {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.8em;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1em;
+  margin-bottom: 1em;
+  padding-right: 1em;
+}
+
+@include horizontal {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.statLabel {
+  font-size: 1.2rem;
+  //color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.statValue {
+  font-size: 1.2em;
+  font-weight: 800;
+}
+
+.graphWrap {
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 4px;
+
+  /* Enable container query width units (cqw) for square cells */
+  container-type: inline-size;
+}
+
+.graph {
+  /* Set from React inline style (number of week-columns) */
+  --weeks: 53;
+  /* Shrink gaps on small widths so cells stay as large as possible */
+  --gap: clamp(1px, 0.25cqw, 3px);
+
+  /*
+    IMPORTANT: Use cqw (container inline-size) instead of %.
+    Percentages in grid tracks resolve against different axes:
+    - columns: % is relative to width
+    - rows: % is relative to height
+    Using cqw keeps cells square.
+  */
+  --cell: calc((100cqw - (var(--weeks) - 1) * var(--gap)) / var(--weeks));
+
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--cell);
+  grid-template-rows: repeat(7, var(--cell));
+  gap: var(--gap);
+  align-items: start;
+  justify-content: start;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.light .cell {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.level0 {
+  background: var(--level0);
+}
+
+.level1 {
+  background: var(--level1);
+}
+
+.level2 {
+  background: var(--level2);
+}
+
+.level3 {
+  background: var(--level3);
+}
+
+.level4 {
+  background: var(--level4);
+}
+
+.footer {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.error {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  background: rgba(255, 0, 0, 0.08);
+  color: var(--foreground);
+}
+
+.loading {
+  margin-top: 12px;
+  font-size: 0.75em;
+  color: var(--muted);
+}
