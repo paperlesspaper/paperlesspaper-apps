@@ -195,10 +195,6 @@ export default function ApplePhotosRandomScreen() {
           ) : null}
         </div>
       )}
-
-      <button className={styles.refresh} onClick={() => load()}>
-        Refresh
-      </button>
     </div>
   );
 }
