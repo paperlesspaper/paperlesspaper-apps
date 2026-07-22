@@ -1,3 +1,8 @@
+> [!TIP]
+> The react.js paperlesspaper-apps will most likely be replaced by the OpenIntegrations that are framework agnostic.
+> https://github.com/paperlesspaper/integrations
+
+
 # paperlesspaper apps
 
 This repository contains [paperlesspaper](https://paperlesspaper.de/en) integrations rendered for eInk displays. It is a Next.js app optimized for fixed-size, low-color layouts and screenshot-based rendering.
