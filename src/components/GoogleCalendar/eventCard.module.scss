@@ -10,7 +10,7 @@
   border: 1px solid transparent;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid var(--foreground);
   &:last-child {
     border-bottom: 0 solid #000;
     //margin-bottom: -0.5em;
@@ -20,6 +20,7 @@
 .title {
   font-size: 1.4em;
   font-weight: 400;
+  line-height: 1.15;
 }
 
 .time {

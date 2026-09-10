@@ -13,6 +13,7 @@ The `BirthCalendar` component calculates and displays pregnancy progress informa
 - Displays current pregnancy day or age once the due date is reached.
 - Shows corresponding weekly milestone image (available for weeks 1, 2, 3, 4, 12, 20, 38).
 - Supports German (`de`) and English (`en`) data sources.
+- English entries include source links and image-generation prompts for future milestone artwork.
 - Customizable color theme, display variant, and accent styling.
 
 ## Query Parameters
@@ -28,8 +29,8 @@ Customize the component via URL query parameters:
 
 ## How It Works
 
-1. Calculate estimated conception date by subtracting 280 days from `birthdate`.
-2. Compute days passed since conception relative to the current date.
+1. Calculate estimated gestational start date by subtracting 280 days from `birthdate`.
+2. Compute gestational-age days relative to the current date.
 3. Select the pregnancy data entry with the largest `day` value not exceeding days passed.
 4. Determine the pregnancy week and pick the closest available milestone image.
 5. Render the milestone image, day count (or age), size comparison, and explanatory text.

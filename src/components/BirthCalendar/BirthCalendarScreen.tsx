@@ -20,19 +20,37 @@ import week12 from "./assets/week12.png";
 import week20 from "./assets/week20.png";
 import week38 from "./assets/week38.png";
 
+type PregnancySource = {
+  title: string;
+  url: string;
+};
+
+type PregnancyEntry = {
+  day: number;
+  age?: string;
+  explanation: string;
+  size?: number;
+  comparison?: string;
+  sources?: PregnancySource[];
+  imagePrompt?: string;
+};
+
 /**
- * Estimates the conception date from a given birth date.
- * Uses ~266 days (38 weeks) as the average time from conception to birth.
+ * Estimates the gestational start date from a due/birth date.
+ * Pregnancy day counts use gestational age, which starts at the last menstrual
+ * period and is conventionally about 280 days before the due date.
  *
- * @param {Date|string} birthDate – either a Date object or an ISO‐format string
- * @returns {Date} – estimated conception date
+ * @param {Date|string} birthDate - either a Date object or an ISO-format string
+ * @returns {Date} - estimated gestational start date
  */
-export function estimateConceptionDate(birthDate: Date | string): Date {
+export function estimateGestationalStartDate(birthDate: Date | string): Date {
   const date = new Date(birthDate);
   const GESTATION_DAYS = 280;
   date.setDate(date.getDate() - GESTATION_DAYS);
   return date;
 }
+
+export const estimateConceptionDate = estimateGestationalStartDate;
 
 export default function BirthCalendarScreen() {
   const searchParams = useSearchParams();
@@ -40,20 +58,21 @@ export default function BirthCalendarScreen() {
   const color = searchParams.get("color") || "dark";
   const kind = searchParams.get("kind") || "default";
   const accent = searchParams.get("accent") || "";
-  const conceptionDate = estimateConceptionDate(
+  const gestationalStartDate = estimateGestationalStartDate(
     searchParams.get("birthdate") || "2023-01-01"
   );
 
   const { language } = useTranslationFromUrl();
 
-  // Get the quote for the current day, mod by 356 to stay within array bounds
-  const pregnancyData = language === "de" ? pregnancyDataDe : pregnancyDataEn;
+  const pregnancyData = (
+    language === "de" ? pregnancyDataDe : pregnancyDataEn
+  ) as PregnancyEntry[];
 
-  // compute days since conception
-  const conception = new Date(conceptionDate);
+  // compute gestational age in days
+  const gestationalStart = new Date(gestationalStartDate);
   const today = new Date();
   const daysPassed = Math.floor(
-    (today.getTime() - conception.getTime()) / (1000 * 60 * 60 * 24)
+    (today.getTime() - gestationalStart.getTime()) / (1000 * 60 * 60 * 24)
   );
 
   // pick the latest entry whose day <= daysPassed
@@ -91,14 +110,18 @@ export default function BirthCalendarScreen() {
   type WeekKey = keyof typeof images;
   type WeekImage = (typeof images)[WeekKey];
 
-  function imageForWeek(day: number): WeekImage {
+  function availableImageWeekForDay(day: number): WeekKey {
     let week = weekForDay(day);
 
     while (week > 1 && !availableWeeks.includes(week)) {
       week--;
     }
 
-    return images[week as WeekKey];
+    return week as WeekKey;
+  }
+
+  function imageForWeek(day: number): WeekImage {
+    return images[availableImageWeekForDay(day)];
   }
 
   useTranslationFromUrl();
@@ -109,19 +132,21 @@ export default function BirthCalendarScreen() {
         <div className={styles.image}>
           <Image
             src={imageForWeek(currentEntry.day)}
-            alt="Week 12 of pregnancy"
+            alt={`Pregnancy week ${availableImageWeekForDay(
+              currentEntry.day
+            )} illustration`}
           />
         </div>
 
         <div className={styles.content}>
           <h1 className={styles.title}>
             <RescaleText id="day" maxFontSize={60} checkHeight>
-              {currentEntry.day < 280 ? (
+              {currentEntry.age ? (
+                currentEntry.age
+              ) : (
                 <>
                   <Trans>Day</Trans>: {currentEntry.day}
                 </>
-              ) : (
-                currentEntry.age
               )}
               {/* currentEntry.age ? ` (${currentEntry.age})` : "" */}
             </RescaleText>
@@ -135,6 +160,23 @@ export default function BirthCalendarScreen() {
                 </div>
               )}
               {currentEntry.explanation}
+              {currentEntry.sources && currentEntry.sources.length > 0 && (
+                <div className={styles.source}>
+                  Source:{" "}
+                  {currentEntry.sources.map((source, index) => (
+                    <React.Fragment key={source.url}>
+                      {index > 0 ? ", " : ""}
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {source.title}
+                      </a>
+                    </React.Fragment>
+                  ))}
+                </div>
+              )}
             </RescaleText>
           </div>
         </div>

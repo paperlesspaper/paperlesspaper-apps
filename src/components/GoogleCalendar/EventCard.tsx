@@ -6,11 +6,12 @@ import type { EventData } from "./GoogleCalendar";
 type EventCardProps = {
   event: EventData;
   language: string;
+  useDisplayTimeZone?: boolean;
 };
 
-const EventCard = ({ event, language }: EventCardProps) => {
+const EventCard = ({ event, language, useDisplayTimeZone = false }: EventCardProps) => {
   const { summary, /* description, */ start, end } = event;
-  const timeZone = start.timeZone || end.timeZone;
+  const timeZone = useDisplayTimeZone ? undefined : start?.timeZone || end?.timeZone;
 
   const formatTime = (dateTime?: string) => {
     if (!dateTime) {
@@ -30,15 +31,19 @@ const EventCard = ({ event, language }: EventCardProps) => {
   return (
     <div className={styles.card}>
       <p className={styles.time}>
-        {start.date ? (
+        {start?.date ? (
           <Trans>All day</Trans>
-        ) : (
+        ) : end?.dateTime ? (
           <>
-            {formatTime(start.dateTime)} - {formatTime(end.dateTime)}
+            {formatTime(start?.dateTime)} - {formatTime(end.dateTime)}
           </>
+        ) : (
+          formatTime(start?.dateTime)
         )}
       </p>
-      <h2 className={styles.title}>{summary}</h2>
+      <h2 className={styles.title}>
+        {summary || <Trans>Untitled event</Trans>}
+      </h2>
       {/* <div
         className={styles.description}
         dangerouslySetInnerHTML={{ __html: description.slice(0, 100) }}

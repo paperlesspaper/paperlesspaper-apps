@@ -10,6 +10,7 @@ import React, {
 // Create the context
 interface LoadingContextProps {
   registerLoading: (key: string) => void;
+  unregisterLoading: (key: string) => void;
   setLoadingStatus: (key: string, loading: boolean) => void;
   allFinishedLoading: boolean;
 }
@@ -45,6 +46,10 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     });
   }, []);
 
+  const unregisterLoading = useCallback((id: string) => {
+    setLoadingStatuses((statuses) => statuses.filter((status) => status.id !== id));
+  }, []);
+
   // Function to update loading status
   const setLoadingStatus = useCallback((id: string, loading: boolean) => {
     setLoadingStatuses((prevStatuses) => {
@@ -72,7 +77,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 
   return (
     <LoadingContext.Provider
-      value={{ registerLoading, setLoadingStatus, allFinishedLoading }}
+      value={{ registerLoading, unregisterLoading, setLoadingStatus, allFinishedLoading }}
     >
       {children}
       {allFinishedLoading ? (
@@ -90,22 +95,18 @@ interface UseLoadingProps {
 }
 
 export const useLoading = ({ id }: UseLoadingProps) => {
-  const { registerLoading, setLoadingStatus } = useContext(
+  const { registerLoading, unregisterLoading, setLoadingStatus } = useContext(
     LoadingContext
   ) as LoadingContextProps;
 
   // Register a unique key for each hook instance
-  const uniqueKey = id
-    ? id
-    : // eslint-disable-next-line react-hooks/rules-of-hooks
-      React.useMemo(
-        () => `loading_${Math.random().toString(36).substr(2, 9)}`,
-        []
-      );
+  const instanceId = React.useId();
+  const uniqueKey = `${id}:${instanceId}`;
 
   React.useEffect(() => {
     registerLoading(uniqueKey);
-  }, [registerLoading, uniqueKey, setLoadingStatus]);
+    return () => unregisterLoading(uniqueKey);
+  }, [registerLoading, unregisterLoading, uniqueKey]);
 
   const setLoading = useCallback(
     (loading: boolean) => {

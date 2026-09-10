@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto, Roboto_Condensed } from "next/font/google";
+import ClientOnly from "@/components/ClientOnly/ClientOnly";
 import ColorVariablesFromParam from "@/components/Theme/ColorVariablesFromParam";
 import { Suspense } from "react";
 import "./globals.scss";
@@ -31,14 +32,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <body
         className={`${roboto.variable} ${robotoCondensed.variable} wrapper`}
+        suppressHydrationWarning
       >
-        <Suspense fallback={null}>
-          <ColorVariablesFromParam />
-        </Suspense>
-        {children}
+        <ClientOnly>
+          <Suspense fallback={null}>
+            <ColorVariablesFromParam />
+          </Suspense>
+          {children}
+        </ClientOnly>
       </body>
     </html>
   );

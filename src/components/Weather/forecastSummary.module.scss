@@ -18,13 +18,6 @@
   @include horizontal {
     flex-direction: column;
   }
-  --cloud-color: #0000ff;
-  --moon-color: #0000ff;
-
-  :global(.dark) & {
-    --cloud-color: #4c4cff;
-    --moon-color: #4c4cff;
-  }
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -152,91 +145,31 @@
 .forecastIcon {
   width: 3em;
   margin: -0.6em;
-  :global(.light) & {
-    filter: brightness(0.6) contrast(2);
+}
+
+.iconExternal {
+  display: block;
+  width: 1.7em;
+  height: 1.7em;
+  margin: 0.25em auto;
+  object-fit: contain;
+}
+
+.iconQweatherFill {
+  :global(.dark) & {
+    filter: brightness(0) invert(1);
   }
+}
+
+.iconOpenWeather {
+  width: 3em;
+  height: auto;
+  margin: -0.6em;
 }
 
 .forecastIconFontAwesome {
   font-size: 1.5em;
   margin: 0.4em 0;
-  --fa-secondary-opacity: 1;
-}
-
-.iconMonochrome {
-  color: var(--foreground);
-}
-
-.iconSun {
-  --fa-primary-color: #ffbb00; /* yellow */
-  --fa-secondary-color: #ff0000; /* red */
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-primary-color: #ffd900;
-    --fa-secondary-color: #ffd900;
-  }
-}
-
-.iconMoon {
-  --fa-primary-color: #ffbb00; /* yellow */
-  --fa-secondary-color: var(--moon-color); /* blue */
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-primary-color: #ffd900;
-  }
-}
-
-.iconCloud {
-  --fa-primary-color: var(--cloud-color); /* blue */
-  --fa-secondary-color: var(--cloud-color); /* blue */
-}
-
-.iconCloudNight {
-  --fa-primary-color: var(--cloud-color); /* blue */
-  --fa-secondary-color: #ffbb00; /* black */
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-secondary-color: #ffd900;
-  }
-}
-
-.iconSunRain {
-  --fa-primary-color: var(--cloud-color); /* blue */
-  --fa-secondary-color: #ffbb00; /* black */
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-secondary-color: #ffd900;
-  }
-}
-
-.iconRain {
-  --fa-primary-color: #ababff; /* blue */
-  --fa-secondary-color: var(--cloud-color); /* blue */
-}
-
-.iconThunder {
-  --fa-primary-color: #ffbb00; /* yellow */
-  --fa-secondary-color: #000000; /* black */
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-primary-color: #ffd900;
-  }
-}
-
-.iconSnow {
-  --fa-primary-color: #000;
-  --fa-secondary-color: #000;
-
-  :global(.dark) &,
-  :global(.red-dark) & {
-    --fa-primary-color: #fff;
-    --fa-secondary-color: #fff;
-  }
-}
-
-.iconFog {
-  --fa-primary-color: #ffffff; /* white */
-  --fa-secondary-color: #000000; /* black */
 }
 
 .outlookContent {

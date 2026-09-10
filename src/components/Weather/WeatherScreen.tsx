@@ -10,6 +10,7 @@ import ForecastOnly from "./ForecastOnly";
 import ForcecastSummary from "./ForecastSummary";
 import useTranslationFromUrl from "@/i18n/useTranslationFromUrl";
 import ErrorMessage from "../Error/ErrorMessage";
+import { useLoading } from "@/helpers/Loading";
 
 export default function WeatherScreen() {
   // Get the current date
@@ -23,7 +24,10 @@ export default function WeatherScreen() {
   const color = searchParams.get("color") || "light";
   const kind = searchParams.get("kind") || "forecast-summary"; // default, today-forecast, 3-days
   const displayLastUpdated = searchParams.get("displayLastUpdated") === "true";
-  const iconStyle = searchParams.get("iconstyle") || "normal";
+  const needsForecast = kind === "forecast" || kind === "forecast-summary";
+  const needsCurrent = kind !== "forecast" || displayLastUpdated;
+  const iconStyle =
+    searchParams.get("iconset") || searchParams.get("iconstyle") || "normal";
 
   //const showTime = searchParams.get("showTime") === "true";
   // const language = searchParams.get("language") || "en-US";
@@ -39,41 +43,56 @@ export default function WeatherScreen() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [weatherData, setWeatherData] = useState<any>(null);
   const [errorMessage, setErrorMessage] = useState<any>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [loading, setLoading] = useState<any>(true);
-
-  const getWeather = async () => {
-    const currentWeatherCall = await fetch(
-      `/api/weather?location=${encodeURIComponent(
-        location
-      )}&language=${language}&kind=current`
-    );
-    const currentWeather = await currentWeatherCall.json();
-
-    const forecastCall = await fetch(
-      `/api/weather?location=${encodeURIComponent(
-        location
-      )}&language=${language}&kind=forecast`
-    );
-
-    const forecast = await forecastCall.json();
-
-    if (!currentWeatherCall.ok) {
-      console.log("errorMessage", currentWeather.error);
-      setErrorMessage({ message: currentWeather.error });
-    }
-    if (!forecastCall.ok) {
-      console.log("errorMessage", forecast.error);
-      setErrorMessage({ message: forecast.error });
-    }
-
-    setLoading(false);
-    setWeatherData({ currentWeather, forecast });
-  };
+  const setLoading = useLoading({ id: "weather-data" });
 
   useEffect(() => {
-    getWeather();
-  }, []);
+    const controller = new AbortController();
+    let cancelled = false;
+    const timeout = setTimeout(() => controller.abort(), 20_000);
+    setLoading(true);
+    setWeatherData(null);
+    setErrorMessage(null);
+
+    const fetchWeather = async (weatherKind: string) => {
+      const query = new URLSearchParams({ location, language, kind: weatherKind });
+      const response = await fetch(`/api/weather?${query}`, {
+        signal: controller.signal,
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || "Unable to load weather data");
+      }
+      return data;
+    };
+
+    Promise.all([
+      needsCurrent ? fetchWeather("current") : Promise.resolve(null),
+      needsForecast ? fetchWeather("forecast") : Promise.resolve(null),
+    ])
+      .then(([currentWeather, forecast]) => {
+        if ((needsCurrent && (!currentWeather?.main || !currentWeather.weather?.length)) ||
+            (needsForecast && (!Array.isArray(forecast?.list) || forecast.list.some((entry: any) =>
+              !entry?.main || !entry.weather?.length || !entry.dt_txt)))) {
+          throw new Error("Invalid weather data received");
+        }
+        if (!cancelled) setWeatherData({ currentWeather, forecast });
+      })
+      .catch((error) => {
+        if (!cancelled) setErrorMessage({ message: controller.signal.aborted
+          ? "Weather request timed out"
+          : error.message || "Unable to load weather data" });
+      })
+      .finally(() => {
+        clearTimeout(timeout);
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+      controller.abort();
+    };
+  }, [location, language, needsCurrent, needsForecast, setLoading]);
 
   const Design =
     kind === "forecast-summary"
@@ -106,12 +125,14 @@ export default function WeatherScreen() {
     }
   })();
 
-  if (!weatherData) {
-    return null;
-  }
-
   if (errorMessage) {
     return <ErrorMessage errorMessage={errorMessage} />;
+  }
+
+  if (!weatherData ||
+      (needsCurrent && !weatherData.currentWeather) ||
+      (needsForecast && !weatherData.forecast)) {
+    return null;
   }
 
   return (

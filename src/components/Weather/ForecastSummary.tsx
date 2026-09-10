@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RescaleText from "../RescaleText/RescaleText";
 import styles from "./forecastSummary.module.scss";
 import { Trans } from "react-i18next";
-import { weatherIconMap, weatherIconMapLight } from "./weatherIconMap";
+import WeatherConditionIcon from "./WeatherConditionIcon";
 
 export default function ForecastSummary({
   language,
@@ -12,7 +11,6 @@ export default function ForecastSummary({
   iconStyle = "normal",
 }: any) {
   const { currentWeather, forecast } = weatherData;
-  const iconMap = iconStyle === "light" ? weatherIconMapLight : weatherIconMap;
 
   const summarizedData = Object.values(
     forecast.list.reduce((acc: any, entry: any) => {
@@ -67,11 +65,6 @@ export default function ForecastSummary({
           </h3>
           <div className={styles.todayForecastContent}>
             {forecast.list.slice(0, 4).map((day: any) => {
-              const iconConfig = iconMap[day.weather[0].icon];
-              const iconClass = iconConfig?.className
-                ? styles[iconConfig.className]
-                : "";
-
               return (
                 <React.Fragment key={day.dt}>
                   <div className={styles.forecastDate}>
@@ -83,18 +76,13 @@ export default function ForecastSummary({
                   </div>
 
                   <div className={styles.forecastDescription}>
-                    {iconConfig ? (
-                      <FontAwesomeIcon
-                        icon={iconConfig.icon}
-                        className={`${styles.forecastIconFontAwesome} ${iconClass}`}
-                      />
-                    ) : (
-                      <img
-                        className={styles.forecastIcon}
-                        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@4x.png`}
-                        alt="weather icon"
-                      />
-                    )}
+                    <WeatherConditionIcon
+                      classNameMap={styles}
+                      fontAwesomeClassName={styles.forecastIconFontAwesome}
+                      iconCode={day.weather[0].icon}
+                      iconSet={iconStyle}
+                      imageClassName={styles.forecastIcon}
+                    />
                   </div>
                   <div className={styles.forecastTemperature}>
                     <span className={styles.forecastTemperatureText}>
@@ -115,11 +103,6 @@ export default function ForecastSummary({
           </h3>
           <div className={styles.outlookContent}>
             {summarizedData.slice(1, 4).map((daySummary: any) => {
-              const iconConfig = iconMap[daySummary.icon];
-              const iconClass = iconConfig?.className
-                ? styles[iconConfig.className]
-                : "";
-
               return (
                 <React.Fragment key={daySummary.date}>
                   <div className={styles.forecastDate}>
@@ -130,18 +113,13 @@ export default function ForecastSummary({
                     </span>
                   </div>
                   <div className={styles.forecastDescription}>
-                    {iconConfig ? (
-                      <FontAwesomeIcon
-                        icon={iconConfig.icon}
-                        className={`${styles.forecastIconFontAwesome} ${iconClass}`}
-                      />
-                    ) : (
-                      <img
-                        className={styles.forecastIcon}
-                        src={`http://openweathermap.org/img/wn/${daySummary.icon}@4x.png`}
-                        alt="weather icon"
-                      />
-                    )}
+                    <WeatherConditionIcon
+                      classNameMap={styles}
+                      fontAwesomeClassName={styles.forecastIconFontAwesome}
+                      iconCode={daySummary.icon.replace(/n$/, "d")}
+                      iconSet={iconStyle}
+                      imageClassName={styles.forecastIcon}
+                    />
                   </div>
                   <div className={styles.forecastTemperature}>
                     <span className={styles.forecastTemperatureText}>

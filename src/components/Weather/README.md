@@ -42,6 +42,7 @@ The `WeatherScreen` component's behavior can be controlled using query parameter
 | `color`    | Theme color for the component (`dark`, `light`, etc.).             | `dark`             |
 | `kind`     | Display mode: `forecast-summary`, `forecast`, or `today-forecast`. | `forecast-summary` |
 | `language` | Language for weather data localization (e.g., `en`, `de`).         | Detected from URL  |
+| `iconset`  | Weather icon set: `normal`, `light`, `qweather`, `glyphs-poly`, `noto-emoji`, `openmoji`, or `openweather`. `iconstyle` is still supported as an alias. | `normal` |
 
 ### Example Query
 
@@ -49,6 +50,12 @@ To display "On This Day" events in English with a light theme:
 
 ```
 http://apps.paperlesspaper.de/weather?location=Dresden&color=light&kind=forecast-summary&language=en
+```
+
+With alternate icons:
+
+```
+http://apps.paperlesspaper.de/weather?location=Dresden&color=light&kind=forecast-summary&iconset=glyphs-poly
 ```
 
 ## API Integration

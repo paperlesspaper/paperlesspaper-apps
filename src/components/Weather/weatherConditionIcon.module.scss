@@ -1,0 +1,39 @@
+.iconSun {
+  --fa-primary-color: #ffcc00;
+  --fa-secondary-color: #ffcc00;
+}
+
+.iconMoon {
+  --fa-primary-color: #ff9900;
+  --fa-secondary-color: #ff9900;
+}
+
+.iconCloud,
+.iconRain,
+.iconSnow,
+.iconFog {
+  --fa-primary-color: #0000ff;
+  --fa-secondary-color: #0000ff;
+}
+
+.iconCloudSun,
+.iconSunRain,
+.iconThunder {
+  --fa-primary-color: #0000ff;
+  --fa-secondary-color: #ffcc00;
+}
+
+.iconCloudNight,
+.iconMoonRain {
+  --fa-primary-color: #0000ff;
+  --fa-secondary-color: #ff9900;
+}
+
+.colored {
+  --fa-primary-opacity: 1;
+  --fa-secondary-opacity: 1;
+}
+
+.iconMonochrome {
+  color: var(--foreground);
+}

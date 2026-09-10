@@ -61,6 +61,33 @@
   margin-right: -1em;
 }
 
+.iconExternal {
+  display: inline-block;
+  width: 1.8em;
+  height: 1.8em;
+  margin: 0;
+  object-fit: contain;
+}
+
+.iconQweatherFill {
+  :global(.dark) & {
+    filter: brightness(0) invert(1);
+  }
+}
+
+.iconOpenWeather {
+  width: 3em;
+  height: auto;
+  margin: -0.5em;
+  margin-right: -1em;
+}
+
+.forecastIconFontAwesome {
+  display: inline-block;
+  font-size: 1.5em;
+  margin: 0;
+}
+
 .forecastTemperature {
   text-align: right;
   padding: 0 1em;

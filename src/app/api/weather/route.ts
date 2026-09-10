@@ -1,12 +1,13 @@
 // app/api/weather/route.js
 
 import { NextRequest, NextResponse } from "next/server";
+import { getCurrentLanguage } from "@/i18n/language";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   const location = searchParams.get("location");
-  const language = searchParams.get("language") || "en";
+  const language = getCurrentLanguage(searchParams.get("language") || "en");
   const kind = searchParams.get("kind") || "default";
 
   if (!location) {
