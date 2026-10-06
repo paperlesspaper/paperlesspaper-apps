@@ -1,7 +1,6 @@
 > [!TIP]
-> The react.js paperlesspaper-apps will most likely be replaced by the OpenIntegrations that are framework agnostic.
-> https://github.com/paperlesspaper/integrations
-
+> This repository is in maintenance mode, because we will move to [OpenIntegration](https://github.com/paperlesspaper/openintegration) as a standard for all integrations. It comes with a simpler boilerplate (just plain html/css/js) instead of using next.js.
+> Here you can find lots of sample projects: [paperlesspapeer-integrations](https://github.com/paperlesspaper/integrations) 
 
 # paperlesspaper apps
 
